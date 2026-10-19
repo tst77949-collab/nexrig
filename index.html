@@ -112,6 +112,7 @@ nav.top a.on::after{
 }
 .searchpanel .srow:last-child{border-bottom:none}
 .searchpanel .srow:hover{background:var(--panel2)}
+.searchpanel .srow.sel{background:var(--panel2);border-left:2px solid var(--acc)}
 .searchpanel .srow img{width:52px;height:40px;object-fit:cover;border-radius:7px}
 .searchpanel .srow .sn{font-size:13.5px;font-weight:500}
 .searchpanel .srow .sp{font-size:12px;color:var(--dim)}
@@ -427,6 +428,121 @@ footer{
 #toTop.show{opacity:1;pointer-events:auto}
 #toTop:hover{border-color:rgba(118,185,0,.5);transform:translateY(-2px)}
 
+/* ---------- product detail modal ---------- */
+.mscrim{position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:95;opacity:0;pointer-events:none;transition:opacity .3s}
+.modal{
+  position:fixed;inset:0;z-index:96;display:grid;place-items:center;padding:20px;
+  opacity:0;pointer-events:none;transition:opacity .3s;
+}
+.modal.open{opacity:1;pointer-events:auto}
+.modal .mbox{
+  background:var(--panel);border:1px solid var(--line);border-radius:calc(var(--r) + 4px);
+  width:min(920px,100%);max-height:min(86vh,780px);overflow-y:auto;
+  display:grid;grid-template-columns:1fr 1fr;
+  transform:scale(.96);transition:transform .3s var(--ease);
+  box-shadow:0 40px 120px rgba(0,0,0,.6);position:relative;
+}
+.modal.open .mbox{transform:scale(1)}
+.modal .mclose{
+  position:absolute;top:12px;right:12px;z-index:3;width:42px;height:42px;
+  border-radius:11px;border:1px solid var(--line);display:grid;place-items:center;
+  background:rgba(11,13,16,.6);backdrop-filter:blur(6px);transition:all .25s;
+}
+.modal .mclose:hover{border-color:var(--err);color:var(--err)}
+.mimg{background:#0d1013;position:relative;min-height:320px}
+.mimg img{width:100%;height:100%;object-fit:cover;
+  box-shadow:0 0 60px rgba(118,185,0,.12),0 24px 60px rgba(0,0,0,.5)}
+.mimg .badge{
+  position:absolute;top:14px;left:14px;z-index:2;
+  font-family:"Space Grotesk";font-size:11px;font-weight:700;letter-spacing:.09em;
+  text-transform:uppercase;color:#0b0d10;background:var(--acc);border-radius:7px;padding:5px 10px;
+}
+.mimg .badge.soft{background:rgba(11,13,16,.8);color:var(--acc);border:1px solid rgba(118,185,0,.4)}
+.minfo{padding:clamp(22px,3vw,36px);display:flex;flex-direction:column;gap:12px}
+.minfo .mcat{font-family:"Space Grotesk";font-size:11.5px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--acc)}
+.minfo h2{font-size:clamp(22px,2.6vw,30px);font-weight:700;letter-spacing:-.025em;line-height:1.15}
+.minfo .mspec{font-size:13.5px;color:var(--dim)}
+.minfo .mrate{display:flex;align-items:center;gap:7px;font-size:13px;color:var(--dim)}
+.minfo .mrate .stars{color:var(--acc);letter-spacing:2px;font-size:12px}
+.minfo .mprice{font-family:"Space Grotesk";font-weight:700;font-size:26px}
+.minfo .mprice s{color:var(--dim);font-weight:400;font-size:15px;margin-left:9px}
+.minfo .mstock{font-size:12.5px;color:var(--dim)}
+.minfo .mstock.low{color:var(--acc);font-weight:600}
+.mrow{display:flex;align-items:center;gap:12px;margin-top:4px}
+.mqty{display:flex;align-items:center;gap:2px;border:1px solid var(--line);border-radius:11px}
+.mqty button{width:42px;height:46px;font-size:17px;border-radius:10px;transition:color .2s}
+.mqty button:hover{color:var(--acc)}
+.mqty b{font-family:"Space Grotesk";min-width:32px;text-align:center;font-size:15px}
+.mrow .btn.buy{flex:1;min-height:46px;padding:0 20px}
+.mrow .btn.ghost{min-height:46px;padding:0 18px}
+.mwhy{border-top:1px solid var(--line);margin-top:8px;padding-top:14px}
+.mwhy h3{font-size:13px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:var(--ink);margin-bottom:6px}
+.mwhy p{font-size:13.5px;color:var(--dim);line-height:1.6}
+@media (max-width:760px){
+  .modal .mbox{grid-template-columns:1fr;max-height:88vh}
+  .mimg{min-height:220px;max-height:260px}
+}
+
+/* ---------- checkout modal ---------- */
+.ckbox{
+  background:var(--panel);border:1px solid var(--line);border-radius:calc(var(--r) + 4px);
+  width:min(920px,100%);max-height:88vh;overflow-y:auto;position:relative;
+  display:grid;grid-template-columns:1.4fr 1fr;
+  transform:scale(.96);transition:transform .3s var(--ease);
+  box-shadow:0 40px 120px rgba(0,0,0,.6);
+}
+.modal.open .ckbox{transform:scale(1)}
+.ckform{padding:clamp(20px,3vw,34px);display:flex;flex-direction:column;gap:18px}
+.ckform h2{font-size:22px;font-weight:700;letter-spacing:-.02em}
+.ckform fieldset{border:none;display:flex;flex-direction:column;gap:9px;min-width:0}
+.ckform legend{font-family:"Space Grotesk";font-size:13px;font-weight:500;letter-spacing:.09em;text-transform:uppercase;color:var(--acc);margin-bottom:9px;display:flex;align-items:center;gap:8px}
+.ckform legend::before{content:"";width:20px;height:2px;background:var(--acc);border-radius:2px}
+.frow{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.frow.one{grid-template-columns:1fr}
+.ffield{display:flex;flex-direction:column;gap:4px;min-width:0}
+.ffield input,.ffield select{
+  background:var(--panel2);border:1px solid var(--line);border-radius:10px;
+  color:var(--ink);font:inherit;font-size:14px;padding:0 13px;min-height:46px;width:100%;
+  transition:border-color .25s;
+}
+.ffield select option{background:var(--panel)}
+.ffield input:focus,.ffield select:focus{outline:none;border-color:rgba(118,185,0,.6)}
+.ffield input.err,.ffield select.err{border-color:var(--err)}
+.ferr{font-size:11.5px;color:var(--err);min-height:15px;line-height:1.3}
+.payopts{display:flex;flex-direction:column;gap:8px}
+.payopt{
+  display:flex;align-items:center;gap:11px;border:1px solid var(--line);border-radius:11px;
+  padding:13px 15px;cursor:pointer;transition:border-color .25s,background .25s;font-size:14px;
+}
+.payopt:hover{border-color:rgba(118,185,0,.4)}
+.payopt.on{border-color:var(--acc);background:var(--acc-dim)}
+.payopt input{accent-color:var(--acc);width:17px;height:17px}
+.cksubmit{
+  background:var(--acc);color:#0b0d10;border-radius:12px;
+  font-family:"Space Grotesk";font-weight:700;font-size:15.5px;min-height:52px;width:100%;
+  transition:filter .25s,transform .25s;
+}
+.cksubmit:hover{filter:brightness(1.07);transform:translateY(-1px)}
+.ckside{
+  background:var(--panel2);border-left:1px solid var(--line);
+  padding:clamp(20px,3vw,30px);display:flex;flex-direction:column;gap:12px;
+}
+.ckside h3{font-size:16px;font-weight:700}
+.ckitem{display:flex;justify-content:space-between;gap:10px;font-size:13.5px;color:var(--dim)}
+.ckitem b{color:var(--ink);font-weight:500;flex:1}
+.ckitem .q{color:var(--dim)}
+.ckside .crows{border-top:1px solid var(--line);padding-top:12px;display:flex;flex-direction:column;gap:7px}
+.ckside .crow{display:flex;justify-content:space-between;font-size:13.5px;color:var(--dim)}
+.ckside .crow.grand{font-family:"Space Grotesk";font-weight:700;font-size:19px;color:var(--ink);margin-top:6px}
+@media (max-width:640px){
+  .ckbox{grid-template-columns:1fr}
+  .ckside{border-left:none;border-top:1px solid var(--line)}
+  .frow{grid-template-columns:1fr}
+}
+@media (prefers-reduced-motion:reduce){
+  .modal,.mscrim,.modal .mbox,.ckbox{transition:none!important}
+  .modal .mbox,.ckbox{transform:none}
+}
 @media (max-width:860px){nav.top{display:none}}
 @media (max-width:640px){
   .hero{min-height:auto;padding-top:56px}
@@ -648,6 +764,67 @@ footer{
   </div>
 </aside>
 
+<div class="mscrim" id="mscrim"></div>
+<div class="modal" id="pmodal" role="dialog" aria-modal="true" aria-label="Product details"></div>
+<div class="modal" id="ckmodal" role="dialog" aria-modal="true" aria-label="Checkout" hidden>
+  <div class="ckbox">
+    <button class="mclose" id="ckClose" aria-label="Close checkout">
+      <svg class="ic" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></svg>
+    </button>
+    <form class="ckform" id="ckForm" novalidate>
+      <h2>Checkout</h2>
+      <fieldset>
+        <legend>Contact</legend>
+        <div class="frow">
+          <div class="ffield"><label for="ckName">Full name</label><input id="ckName" type="text" autocomplete="name"><span class="ferr" id="errName"></span></div>
+          <div class="ffield"><label for="ckPhone">Phone</label><input id="ckPhone" type="tel" autocomplete="tel" inputmode="tel" placeholder="+98 912 000 0000"><span class="ferr" id="errPhone"></span></div>
+        </div>
+        <div class="frow one">
+          <div class="ffield"><label for="ckEmail">Email</label><input id="ckEmail" type="email" autocomplete="email" placeholder="you@example.com"><span class="ferr" id="errEmail"></span></div>
+        </div>
+      </fieldset>
+      <fieldset>
+        <legend>Shipping</legend>
+        <div class="frow one">
+          <div class="ffield"><label for="ckAddr">Address</label><input id="ckAddr" type="text" autocomplete="street-address"><span class="ferr" id="errAddr"></span></div>
+        </div>
+        <div class="frow">
+          <div class="ffield"><label for="ckCity">City</label><input id="ckCity" type="text" autocomplete="address-level2"><span class="ferr" id="errCity"></span></div>
+          <div class="ffield"><label for="ckProv">Province</label>
+            <select id="ckProv">
+              <option value="">Select…</option>
+              <option>Tehran</option><option>Alborz</option><option>Isfahan</option><option>Fars</option>
+              <option>Khorasan Razavi</option><option>Azerbaijan East</option><option>Azerbaijan West</option>
+              <option>Gilan</option><option>Mazandaran</option><option>Khuzestan</option><option>Other</option>
+            </select><span class="ferr" id="errProv"></span>
+          </div>
+        </div>
+        <div class="frow one">
+          <div class="ffield"><label for="ckPostal">Postal code (10 digits)</label><input id="ckPostal" type="text" inputmode="numeric" autocomplete="postal-code" maxlength="10" placeholder="1234567890"><span class="ferr" id="errPostal"></span></div>
+        </div>
+      </fieldset>
+      <fieldset>
+        <legend>Payment method</legend>
+        <div class="payopts" role="radiogroup" aria-label="Payment method">
+          <label class="payopt"><input type="radio" name="pay" value="zarinpal" checked>ZarinPal (online card)</label>
+          <label class="payopt"><input type="radio" name="pay" value="cod">Pay on delivery</label>
+          <label class="payopt"><input type="radio" name="pay" value="transfer">Bank transfer (manual)</label>
+        </div>
+      </fieldset>
+      <button type="submit" class="cksubmit" id="ckSubmit">Pay with ZarinPal</button>
+    </form>
+    <aside class="ckside">
+      <h3>Order summary</h3>
+      <div id="ckItems" style="display:flex;flex-direction:column;gap:7px"></div>
+      <div class="crows">
+        <div class="crow"><span>Subtotal</span><span id="ckSub">$0</span></div>
+        <div class="crow"><span>Shipping</span><span id="ckShip">$0</span></div>
+        <div class="crow grand"><span>Total</span><span id="ckTotal">$0</span></div>
+      </div>
+    </aside>
+  </div>
+</div>
+
 <div class="toast" id="toast"></div>
 <button id="toTop" aria-label="Back to top">
   <svg class="ic" viewBox="0 0 24 24"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
@@ -677,6 +854,28 @@ var P=[
  {id:17,name:"Rig Mat XXL Speed",        spec:"900×400 mm · stitched edge · 3 mm",      cat:"Gear",     price:29,  was:null, img:U+"photo-1616763355603-9755a640a287?w=900&q=80", rating:4.5, rc:890, tag:null,        stock:40},
  {id:18,name:"Player One Headset Stand", spec:"Aluminum · RGB base · USB hub",          cat:"Gear",     price:34,  was:null, img:U+"photo-1613040809024-b4ef7ba99bc3?w=900&q=80", rating:4.3, rc:175, tag:null,        stock:22}
 ];
+/* Why-we-built-it copy — one honest paragraph per product */
+var BLURBS={
+ 1:"We burn every Nexus in for 48 hours under full synthetic load because a $1,899 rig should never blue-screen on stream day. Cable routing is done by hand, one unit at a time — slower, but nothing rattles.",
+ 2:"Hall-effect switches let you set actuation per-key, so movement keys fire at hair-trigger depth while typing keys stay deliberate. We kept the TKL layout because most players never touch the numpad.",
+ 3:"A gasket mount isolates the plate from the case, so keystrokes sound deep instead of hollow. Forging the case from a single aluminum billet costs more, but it kills flex and resonance in one move.",
+ 4:"Low-profile optical switches cut travel distance without going scissor-fold flimsy. We specced USB-C because nobody should hunt for a legacy cable in 2026.",
+ 5:"At 49 g with an 8,000 Hz polling link, the Pulse Pro stops tracking fingers and starts tracking intent. The 90-hour battery means you charge it on rest days, not match days.",
+ 6:"We stripped the Glide to 49 g by removing everything that does not touch the desk mat — then gave it optical switches so no weight was traded for reliability.",
+ 7:"Hybrid ANC reads the room 500 times a second, so the 50 mm drivers only have to do one job: sound honest. Bluetooth 5.3 keeps audio and chat on separate lanes.",
+ 8:"Open-back tuning trades noise isolation for a soundstage you can place footsteps inside. The mic detaches because studio-grade listening and comms are different moods.",
+ 9:"Cardioid rejection is set tight enough to ignore mechanical keys two feet away — we measured it on a Vektor TKL, full speed. 24-bit/96 kHz means the stream hears what you hear.",
+ 10:"DSP tuning is done against real desk setups, not an anechoic chamber, because your speakers live on a desk, not in one. USB and optical inputs let the same pair serve PC and console.",
+ 11:"Hall sticks simply cannot drift — there is no physical wiper to wear. Four back paddles duplicate the face buttons so you never lift your thumbs mid-fight.",
+ 12:"Trigger stops cut half the pull distance, which is free fire-rate. We kept the wired-class wireless link latency below 2 ms because 'close enough' loses gunfights.",
+ 13:"The anti-slip shell survives hands that get sweaty at match point. Forty hours is a full ranked season between charges.",
+ 14:"0.125 ms effective response on a true 240 Hz panel means the frame your eyes get is the frame the game rendered. G-Sync compatibility was verified on shipped units, not spec sheets.",
+ 15:"165 Hz at 1 ms covers every title most people actually play, and HDR400 makes dark corners readable. Height-adjust was non-negotiable — a monitor at the wrong height ruins a good chair.",
+ 16:"Mesh lumbar support holds its shape through a ten-hour session that foam gives up on in two. The 150-degree recline is rated for full extension thousands of times.",
+ 17:"Three-millimeter cloth with a stitched edge glides fast but stops precisely — speed mats that never stop are just ice. XXL because your keyboard and mouse deserve the same surface.",
+ 18:"Aluminum instead of plastic means the stand outlives the headset it holds. The USB hub earned its desk footprint by powering the mouse dongle and the mic at once."
+};
+P.forEach(function(p){p.blurb=BLURBS[p.id]||""});
 var CATS=["All","Keyboards","Mice","Audio","Controllers","Displays","Gear"];
 var $=function(s){return document.querySelector(s)};
 var money=function(n){return "$"+n.toFixed(n%1?2:0)};
@@ -733,18 +932,65 @@ $("#railPrev").addEventListener("click",function(){rail.scrollBy({left:-rail.cli
 $("#railNext").addEventListener("click",function(){rail.scrollBy({left:rail.clientWidth*0.8,behavior:"smooth"})});
 rail.addEventListener("scroll",railUpdate,{passive:true});railUpdate();
 
-/* add-to-cart (delegate on both containers) */
+/* add-to-cart + open detail modal (delegate on both containers) */
 ["grid","rail"].forEach(function(id){
   document.getElementById(id).addEventListener("click",function(e){
     var add=e.target.closest("[data-add]");
     if(add){e.stopPropagation();addToCart(+add.getAttribute("data-add"));return;}
     var c=e.target.closest(".pcard");
-    if(c)addToCart(+c.getAttribute("data-id"));
+    if(c)openModal(+c.getAttribute("data-id"),c);
   });
   document.getElementById(id).addEventListener("keydown",function(e){
-    if(e.key==="Enter"&&e.target.classList.contains("pcard"))addToCart(+e.target.getAttribute("data-id"));
+    if(e.key==="Enter"&&e.target.classList.contains("pcard"))openModal(+e.target.getAttribute("data-id"),e.target);
   });
 });
+
+/* ---------- product detail modal ---------- */
+var pmodal=$("#pmodal"),mscrim=$("#mscrim"),mOpen=false,mQtyN=1,mProd=null,mReturnFocus=null;
+function openModal(id,returnFocus){
+  var p=findP(id);if(!p)return;
+  mProd=p;mQtyN=1;mReturnFocus=returnFocus||null;
+  var badge=p.tag?'<span class="badge'+(/off|New/i.test(p.tag)?' soft':'')+'">'+p.tag+'</span>':"";
+  var stock=p.stock<=3?'<span class="mstock low">Only '+p.stock+' left</span>':'<span class="mstock">In stock — '+p.stock+' units</span>';
+  pmodal.innerHTML='<div class="mbox">'+
+    '<button class="mclose" data-mclose aria-label="Close"><svg class="ic" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></svg></button>'+
+    '<div class="mimg"><img src="'+p.img+'" alt="'+p.name+'">'+badge+'</div>'+
+    '<div class="minfo">'+
+      '<span class="mcat">'+p.cat+'</span>'+
+      '<h2>'+p.name+'</h2>'+
+      '<div class="mspec">'+p.spec+'</div>'+
+      '<div class="mrate"><span class="stars">'+stars(p.rating)+'</span> '+p.rating.toFixed(1)+' <span style="color:var(--dim)">('+p.rc+' reviews)</span></div>'+
+      '<div class="mprice">'+money(p.price)+(p.was?"<s>"+money(p.was)+"</s>":"")+'</div>'+
+      stock+
+      '<div class="mrow">'+
+        '<div class="mqty"><button data-mq="-1" aria-label="Decrease quantity">−</button><b id="mQty">1</b><button data-mq="1" aria-label="Increase quantity">+</button></div>'+
+        '<button class="btn buy" id="mAdd">Add to cart</button>'+
+        '<button class="btn ghost" data-mclose>Close</button>'+
+      '</div>'+
+      '<div class="mwhy"><h3>Why we built it this way</h3><p>'+p.blurb+'</p></div>'+
+    '</div></div>';
+  pmodal.classList.add("open");mscrim.classList.add("on");
+  mOpen=true;document.body.style.overflow="hidden";
+  setTimeout(function(){var c=pmodal.querySelector(".mclose");if(c)c.focus()},80);
+}
+function closeModal(){
+  pmodal.classList.remove("open");mscrim.classList.remove("on");
+  mOpen=false;document.body.style.overflow="";
+  if(mReturnFocus&&document.contains(mReturnFocus))mReturnFocus.focus();
+  mReturnFocus=null;
+}
+pmodal.addEventListener("click",function(e){
+  if(e.target===pmodal){closeModal();return;}
+  if(e.target.closest("[data-mclose]")){closeModal();return;}
+  var mq=e.target.closest("[data-mq]");
+  if(mq){
+    mQtyN=Math.max(1,mQtyN+(+mq.getAttribute("data-mq")));
+    var q=pmodal.querySelector("#mQty");if(q)q.textContent=mQtyN;
+    return;
+  }
+  if(e.target.closest("#mAdd")){addToCart(mProd.id,mQtyN);closeModal();}
+});
+mscrim.addEventListener("click",function(){if(mOpen)closeModal()});
 
 /* cart */
 function cartTotals(){
@@ -764,7 +1010,10 @@ function renderDrawer(){
   $("#grand").textContent=money(c.t);
   $("#checkout").disabled=!ids.length;
 }
-function addToCart(id){cart[id]=(cart[id]||0)+1;save();renderDrawer();toast("<b>"+findP(id).name+"</b> added")}
+function addToCart(id,qty){
+  cart[id]=(cart[id]||0)+(qty||1);save();renderDrawer();
+  toast("<b>"+findP(id).name+"</b> added"+((qty||1)>1?" ×"+qty:""));
+}
 function setQty(id,q){if(q<=0)delete cart[id];else cart[id]=q;save();renderDrawer()}
 $("#ditems").addEventListener("click",function(e){
   var q=e.target.closest("[data-q]");
@@ -779,9 +1028,84 @@ function setDrawer(o){drawer.classList.toggle("open",o);scrim.classList.toggle("
 $("#cartBtn").addEventListener("click",function(){renderDrawer();setDrawer(true)});
 $("#closeDrawer").addEventListener("click",function(){setDrawer(false)});
 scrim.addEventListener("click",function(){setDrawer(false)});
-$("#checkout").addEventListener("click",function(){
-  var c=cartTotals();
-  toast("Demo checkout — <b>"+c.n+"</b> item(s), <b>"+money(c.t)+"</b>. No real charge.");
+/* ---------- checkout flow ---------- */
+var ckmodal=$("#ckmodal"),ckOpenFlag=false;
+var PAY_LABEL={zarinpal:"Pay with ZarinPal",cod:"Place order",transfer:"Get transfer details"};
+function openCheckout(){
+  var ids=Object.keys(cart);if(!ids.length)return;
+  setDrawer(false);
+  var sub=cartTotals().t,ship=sub>=99?0:9;
+  $("#ckItems").innerHTML=ids.map(function(k){
+    var p=findP(+k);
+    return '<div class="ckitem"><b>'+p.name+'</b><span class="q">×'+cart[k]+'</span><span>'+money(p.price*cart[k])+'</span></div>';
+  }).join("");
+  $("#ckSub").textContent=money(sub);
+  $("#ckShip").textContent=ship?money(ship):"Free";
+  $("#ckTotal").textContent=money(sub+ship);
+  updatePayLabel();
+  ckmodal.hidden=false;
+  requestAnimationFrame(function(){ckmodal.classList.add("open")});
+  ckOpenFlag=true;document.body.style.overflow="hidden";
+  setTimeout(function(){var i=$("#ckName");if(i)i.focus()},80);
+}
+function closeCheckout(){
+  ckmodal.classList.remove("open");
+  ckOpenFlag=false;document.body.style.overflow="";
+  setTimeout(function(){ckmodal.hidden=true},300);
+}
+function updatePayLabel(){
+  var sel=ckmodal.querySelector('input[name="pay"]:checked');
+  $("#ckSubmit").textContent=sel?PAY_LABEL[sel.value]:"Place order";
+  ckmodal.querySelectorAll(".payopt").forEach(function(l){
+    l.classList.toggle("on",l.querySelector("input").checked);
+  });
+}
+ckmodal.addEventListener("change",function(e){
+  if(e.target.name==="pay")updatePayLabel();
+});
+$("#checkout").addEventListener("click",openCheckout);
+$("#ckClose").addEventListener("click",closeCheckout);
+ckmodal.addEventListener("click",function(e){if(e.target===ckmodal)closeCheckout()});
+$("#ckForm").addEventListener("submit",function(e){
+  e.preventDefault();
+  var ok=true;
+  function field(id,errId,test,msg){
+    var el=$(id),err=$(errId),v=el.value.trim();
+    var good=test(v);
+    el.classList.toggle("err",!good);
+    err.textContent=good?"":msg;
+    if(!good&&ok){el.focus();ok=false;}
+    return good;
+  }
+  field("#ckName","#errName",function(v){return v.length>=2},"Enter your full name");
+  field("#ckEmail","#errEmail",function(v){return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v)},"Enter a valid email");
+  field("#ckAddr","#errAddr",function(v){return v.length>=5},"Enter your street address");
+  field("#ckCity","#errCity",function(v){return v.length>=2},"Enter your city");
+  field("#ckProv","#errProv",function(v){return v!==""},"Select your province");
+  field("#ckPostal","#errPostal",function(v){return /^\d{10}$/.test(v)},"Postal code must be exactly 10 digits");
+  if(!ok)return;
+  /* PRODUCTION: replace with real gateway call */
+  var chars="ABCDEFGHJKLMNPQRSTUVWXYZ23456789",code="NX-";
+  for(var i=0;i<6;i++)code+=chars[Math.floor(Math.random()*chars.length)];
+  var orders=[];
+  try{orders=JSON.parse(localStorage.getItem("nexrig_orders")||"[]")}catch(err){orders=[]}
+  orders.push(code);
+  if(orders.length>20)orders=orders.slice(-20);
+  try{localStorage.setItem("nexrig_orders",JSON.stringify(orders))}catch(err){}
+  $("#ditems").innerHTML=
+    '<div style="text-align:center;padding:48px 12px;display:flex;flex-direction:column;gap:14px;align-items:center">'+
+    '<svg class="ic" viewBox="0 0 24 24" style="width:44px;height:44px;color:var(--acc)"><path d="M20 6 9 17l-5-5"/></svg>'+
+    '<h2 style="font-size:22px">Order confirmed</h2>'+
+    '<p style="color:var(--dim);font-size:14px">Order code</p>'+
+    '<span style="font-family:\'Space Grotesk\';font-weight:700;font-size:20px;letter-spacing:.09em;border:1px dashed rgba(118,185,0,.55);color:var(--acc);border-radius:11px;padding:11px 20px">'+code+'</span>'+
+    '<p style="color:var(--dim);font-size:13.5px;max-width:30ch">We\'ll contact you within 24 hours to confirm delivery details.</p>'+
+    '<button class="btn ghost" id="dToclose" style="margin-top:6px">Keep browsing</button></div>';
+  $("#dToclose").addEventListener("click",function(){setDrawer(false)});
+  cart={};try{localStorage.removeItem("nexrig_cart")}catch(err){}
+  renderDrawer();
+  closeCheckout();
+  setDrawer(true);
+  toast("Order <b>"+code+"</b> placed");
 });
 $("#toTop").addEventListener("click",function(){scrollTo({top:0,behavior:"smooth"})});
 
@@ -826,14 +1150,40 @@ function setSearch(o){
     buildRes("");
   }
   if(o)setTimeout(function(){var i=$("#sIn");if(i)i.focus()},60);
+  if(!o){
+    /* FEATURE 1: search input regains focus after the panel closes */
+    setTimeout(function(){var i=$("#sIn");(i||sBtn).focus()},60);
+  }
+}
+/* FEATURE 1: keyboard navigation state for search results */
+var sSel=-1;
+function sRows(){return Array.prototype.slice.call(sPanel.querySelectorAll(".srow[data-jump]"))}
+function setSel(n){
+  var rows=sRows();
+  if(!rows.length){sSel=-1;return}
+  sSel=(n+rows.length)%rows.length;
+  rows.forEach(function(r,i){
+    var on=i===sSel;
+    r.classList.toggle("sel",on);
+    r.setAttribute("aria-selected",on?"true":"false");
+  });
+  rows[sSel].scrollIntoView({block:"nearest"});
 }
 function buildRes(q){
   var res=$("#sRes");if(!res)return;
   q=q.trim().toLowerCase();
   var list=P.filter(function(p){return !q||p.name.toLowerCase().indexOf(q)>-1||p.spec.toLowerCase().indexOf(q)>-1}).slice(0,6);
   res.innerHTML=list.length?list.map(function(p){
-    return '<div class="srow" data-jump="'+p.id+'"><img src="'+p.img+'" alt=""><div><div class="sn">'+p.name+'</div><div class="sp">'+money(p.price)+'</div></div></div>';
+    return '<div class="srow" role="option" aria-selected="false" data-jump="'+p.id+'"><img src="'+p.img+'" alt=""><div><div class="sn">'+p.name+'</div><div class="sp">'+money(p.price)+'</div></div></div>';
   }).join(""):'<div class="none">No match for “'+q+'”. Try “mouse”, “27” or “RTX”.</div>';
+  if(list.length){
+    res.setAttribute("role","listbox");
+    /* FEATURE 1: results changed — selection resets to first row */
+    sSel=-1;setSel(0);
+  }else{
+    res.removeAttribute("role");
+    sSel=-1;
+  }
 }
 sBtn.addEventListener("click",function(){setSearch(!sOpen)});
 document.addEventListener("click",function(e){
@@ -843,14 +1193,26 @@ sPanel.addEventListener("click",function(e){
   var row=e.target.closest("[data-jump]");
   if(row){
     setSearch(false);
-    document.getElementById("catalog").scrollIntoView({behavior:"smooth"});
     var id=+row.getAttribute("data-jump");
     var p=findP(id);
-    toast("<b>"+p.name+"</b> — in "+p.cat);
+    document.getElementById("catalog").scrollIntoView({behavior:"smooth"});
+    setTimeout(function(){openModal(id,null)},350);
   }
 });
 sPanel.addEventListener("keydown",function(e){
-  if(e.key==="Enter"){var r=sPanel.querySelector("[data-jump]");if(r)r.click();}
+  var rows=sRows();
+  /* FEATURE 1: arrow keys move the .sel highlight through result rows */
+  if(e.key==="ArrowDown"||e.key==="ArrowUp"){
+    if(!rows.length)return;
+    e.preventDefault();
+    setSel(sSel<0?0:sSel+(e.key==="ArrowDown"?1:-1));
+    return;
+  }
+  /* FEATURE 1: Enter activates the selected row (same as clicking it) */
+  if(e.key==="Enter"){
+    if(e.target.id==="sIn"&&sSel>=0&&rows[sSel]){rows[sSel].click();return}
+    var r=sPanel.querySelector("[data-jump]");if(r)r.click();
+  }
 });
 
 /* countdown — honest: to midnight today */
@@ -881,12 +1243,13 @@ $("#nlForm").addEventListener("submit",function(e){
   $("#nlEmail").value="";
 });
 
-/* escape stack */
+/* escape stack: product modal > checkout modal > drawer > search panel */
 document.addEventListener("keydown",function(e){
   if(e.key!=="Escape")return;
-  if(drawer.classList.contains("open"))setDrawer(false);
+  if(mOpen)closeModal();
+  else if(ckOpenFlag)closeCheckout();
+  else if(drawer.classList.contains("open"))setDrawer(false);
   else if(sOpen)setSearch(false);
-  else if(scrim.classList.contains("on"))setDrawer(false);
 });
 
 renderDrawer();
