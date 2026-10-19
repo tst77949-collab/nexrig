@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>NEXRIG — Pro Gaming Gear</title>
+<meta name="description" content="NEXRIG: pro-grade gaming gear. Keyboards, mice, headsets, monitors and battlestation hardware — tested by players, priced for players.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0c0e12;
+  --panel:#14171d;
+  --panel2:#191d24;
+  --ink:#eef0f3;
+  --dim:#9aa3ad;
+  --line:rgba(238,240,243,.09);
+  --hot:#ffb454;          /* boost amber — warm, not the default acid green */
+  --hot2:#ff7a4d;
+  --plasma:linear-gradient(94deg,#ffb454,#ff7a4d 55%,#e14dff);
+  --radius:14px;
+  --pad:clamp(16px,3.4vw,44px);
+  --ease:cubic-bezier(.22,.61,.36,1);
+  --safe-top:env(safe-area-inset-top,0px);--safe-b:env(safe-area-inset-bottom,0px);
+  --safe-l:env(safe-area-inset-left,0px);--safe-r:env(safe-area-inset-right,0px);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  background:
+    radial-gradient(1200px 600px at 85% -10%,rgba(255,122,77,.07),transparent 60%),
+    radial-gradient(900px 500px at -10% 20%,rgba(225,77,255,.05),transparent 55%),
+    var(--bg);
+  color:var(--ink);
+  font-family:"Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  font-weight:300;line-height:1.55;
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+img{display:block;max-width:100%}
+button{font:inherit;color:inherit;background:none;border:none;cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:transparent}
+a{color:inherit;text-decoration:none;-webkit-tap-highlight-color:transparent}
+::selection{background:rgba(255,180,84,.28)}
+
+h1,h2,h3,.display{font-family:"Space Grotesk","Inter",sans-serif;letter-spacing:-.02em}
+
+/* ---------- header ---------- */
+header{
+  position:sticky;top:0;z-index:50;
+  display:flex;align-items:center;justify-content:space-between;gap:16px;
+  padding:calc(14px + var(--safe-top)) calc(var(--pad) + var(--safe-r)) 14px calc(var(--pad) + var(--safe-l));
+  background:rgba(12,14,18,.72);
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--line);
+}
+.logo{display:flex;align-items:center;gap:10px}
+.logo .bolt{
+  width:30px;height:30px;border-radius:9px;background:var(--plasma);
+  display:grid;place-items:center;font-size:15px;color:#16130e;font-family:"Space Grotesk";font-weight:700;
+}
+.logo b{font-family:"Space Grotesk";font-weight:700;font-size:19px;letter-spacing:.02em}
+.logo b i{font-style:normal;color:var(--hot)}
+nav.top{display:flex;gap:26px;font-size:14px;color:var(--dim)}
+nav.top a{transition:color .25s}
+nav.top a:hover,nav.top a.on{color:var(--ink)}
+.hdr-actions{display:flex;align-items:center;gap:8px}
+.cart-btn{
+  position:relative;min-width:46px;min-height:46px;border-radius:12px;
+  border:1px solid var(--line);display:grid;place-items:center;font-size:19px;
+  transition:border-color .25s,transform .25s;
+}
+.cart-btn:hover{border-color:rgba(255,180,84,.5);transform:translateY(-1px)}
+.cart-count{
+  position:absolute;top:-5px;right:-5px;min-width:19px;height:19px;padding:0 5px;
+  border-radius:999px;background:var(--hot);color:#16130e;
+  font-family:"Space Grotesk";font-weight:700;font-size:11.5px;line-height:19px;
+  transform:scale(0);transition:transform .3s var(--ease);
+}
+.cart-count.show{transform:scale(1)}
+
+/* ---------- hero ---------- */
+.hero{
+  position:relative;overflow:hidden;
+  padding:clamp(64px,9vw,120px) calc(var(--pad) + var(--safe-r)) clamp(56px,8vw,96px) calc(var(--pad) + var(--safe-l));
+}
+.hero .kicker{
+  display:inline-flex;align-items:center;gap:8px;
+  font-size:12.5px;font-weight:500;color:var(--hot);
+  border:1px solid rgba(255,180,84,.3);border-radius:999px;padding:7px 14px;margin-bottom:22px;
+  background:rgba(255,180,84,.06);
+}
+.hero h1{
+  font-size:clamp(38px,7vw,84px);line-height:1.02;font-weight:700;
+  max-width:14ch;
+}
+.hero h1 .grad{
+  background:var(--plasma);-webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.hero p.sub{
+  margin-top:20px;max-width:52ch;color:var(--dim);font-size:clamp(15px,1.6vw,17.5px);
+}
+.hero .cta-row{display:flex;gap:12px;margin-top:32px;flex-wrap:wrap}
+.btn{
+  display:inline-flex;align-items:center;gap:9px;
+  font-family:"Space Grotesk";font-weight:500;font-size:15px;
+  border-radius:12px;padding:14px 22px;min-height:48px;
+  transition:transform .25s var(--ease),box-shadow .25s,filter .25s;
+}
+.btn.primary{background:var(--plasma);color:#16130e}
+.btn.primary:hover{transform:translateY(-2px);box-shadow:0 12px 34px rgba(255,122,77,.28)}
+.btn.ghost{border:1px solid var(--line);color:var(--ink)}
+.btn.ghost:hover{border-color:rgba(238,240,243,.3)}
+.hero .stats{
+  display:flex;gap:clamp(24px,4vw,56px);margin-top:48px;flex-wrap:wrap;
+}
+.hero .stat b{font-family:"Space Grotesk";font-size:clamp(22px,2.6vw,30px);font-weight:700;display:block}
+.hero .stat span{font-size:12.5px;color:var(--dim)}
+.hero .hero-art{
+  position:absolute;right:-140px;top:-60px;width:min(52vw,640px);opacity:.5;
+  pointer-events:none;filter:saturate(1.1);
+  mask-image:radial-gradient(60% 60% at 50% 50%,#000 40%,transparent 78%);
+  -webkit-mask-image:radial-gradient(60% 60% at 50% 50%,#000 40%,transparent 78%);
+}
+@media (max-width:860px){.hero .hero-art{opacity:.22;right:-200px}}
+
+/* ---------- marquee ---------- */
+.brands{
+  border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  overflow:hidden;padding:14px 0;
+}
+.brands .track{display:flex;gap:56px;width:max-content;animation:slide 26s linear infinite}
+.brands span{
+  font-family:"Space Grotesk";font-weight:500;font-size:14px;letter-spacing:.14em;
+  color:var(--dim);text-transform:uppercase;white-space:nowrap;
+}
+@keyframes slide{to{transform:translateX(-50%)}}
+
+/* ---------- catalog ---------- */
+section{padding:clamp(48px,7vw,84px) calc(var(--pad) + var(--safe-r)) clamp(48px,7vw,84px) calc(var(--pad) + var(--safe-l))}
+.sec-head{display:flex;align-items:flex-end;justify-content:space-between;gap:18px;margin-bottom:30px;flex-wrap:wrap}
+.sec-head h2{font-size:clamp(25px,3.4vw,40px);font-weight:700}
+.sec-head .note{color:var(--dim);font-size:14px;max-width:44ch}
+.filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:26px}
+.chip{
+  font-size:13.5px;font-weight:500;color:var(--dim);
+  border:1px solid var(--line);border-radius:999px;padding:9px 17px;min-height:40px;
+  transition:all .25s;
+}
+.chip:hover{color:var(--ink);border-color:rgba(238,240,243,.25)}
+.chip.on{
+  color:#16130e;background:var(--hot);border-color:var(--hot);font-weight:600;
+}
+.grid{
+  display:grid;gap:clamp(12px,1.6vw,20px);
+  grid-template-columns:repeat(auto-fill,minmax(255px,1fr));
+}
+.pcard{
+  background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);
+  overflow:hidden;cursor:pointer;position:relative;
+  transition:transform .35s var(--ease),border-color .35s,box-shadow .35s;
+  display:flex;flex-direction:column;
+}
+.pcard:hover{transform:translateY(-5px);border-color:rgba(255,180,84,.35);box-shadow:0 18px 44px rgba(0,0,0,.45)}
+.pcard .ph{position:relative;aspect-ratio:4/3;background:#0a0c10;overflow:hidden}
+.pcard .ph img{width:100%;height:100%;object-fit:cover;transition:transform .7s var(--ease);opacity:.92}
+.pcard:hover .ph img{transform:scale(1.06);opacity:1}
+.pcard .tag{
+  position:absolute;top:12px;left:12px;font-family:"Space Grotesk";font-weight:700;
+  font-size:11px;letter-spacing:.08em;text-transform:uppercase;
+  background:rgba(12,14,18,.78);backdrop-filter:blur(6px);
+  border:1px solid rgba(255,180,84,.4);color:var(--hot);
+  border-radius:999px;padding:5px 10px;
+}
+.pcard .body{padding:16px 16px 18px;display:flex;flex-direction:column;gap:6px;flex:1}
+.pcard .cat{font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);font-weight:500}
+.pcard h3{font-size:16.5px;font-weight:500}
+.pcard .rate{font-size:12.5px;color:var(--hot);letter-spacing:.05em}
+.pcard .row{margin-top:auto;display:flex;align-items:center;justify-content:space-between;gap:10px;padding-top:10px}
+.pcard .price{font-family:"Space Grotesk";font-weight:700;font-size:18px}
+.pcard .price s{color:var(--dim);font-weight:400;font-size:13px;margin-left:7px}
+.pcard .add{
+  min-width:44px;min-height:44px;border-radius:11px;
+  border:1px solid var(--line);display:grid;place-items:center;font-size:18px;
+  transition:all .25s;
+}
+.pcard .add:hover{background:var(--hot);border-color:var(--hot);color:#16130e;transform:scale(1.06)}
+.stock-low{color:var(--hot2);font-size:11.5px;font-weight:500}
+.empty{color:var(--dim);padding:40px 0;text-align:center}
+
+/* ---------- features ---------- */
+.feats{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px}
+.feat{
+  border:1px solid var(--line);border-radius:var(--radius);padding:22px;
+  background:linear-gradient(160deg,var(--panel),transparent 70%);
+}
+.feat .ico{font-size:22px;margin-bottom:12px;display:block}
+.feat h3{font-size:16px;font-weight:500;margin-bottom:6px}
+.feat p{font-size:13.5px;color:var(--dim)}
+
+/* ---------- banner ---------- */
+.promo{
+  border-radius:calc(var(--radius) + 6px);
+  border:1px solid rgba(255,180,84,.25);
+  background:
+    radial-gradient(500px 220px at 90% 0%,rgba(255,122,77,.16),transparent 65%),
+    radial-gradient(420px 200px at 8% 100%,rgba(225,77,255,.12),transparent 60%),
+    var(--panel2);
+  padding:clamp(28px,4.6vw,52px);
+  display:flex;align-items:center;justify-content:space-between;gap:26px;flex-wrap:wrap;
+}
+.promo h2{font-size:clamp(23px,3vw,36px);font-weight:700;max-width:22ch}
+.promo p{color:var(--dim);margin-top:8px;max-width:46ch}
+.code{
+  font-family:"Space Grotesk";font-weight:700;letter-spacing:.2em;
+  border:1px dashed rgba(255,180,84,.55);color:var(--hot);
+  border-radius:11px;padding:13px 20px;font-size:16px;
+}
+
+/* ---------- cart drawer ---------- */
+.scrim{position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:80;opacity:0;pointer-events:none;transition:opacity .35s}
+.scrim.on{opacity:1;pointer-events:auto}
+.drawer{
+  position:fixed;top:0;right:0;bottom:0;z-index:90;
+  width:min(430px,100vw);
+  background:var(--panel);border-left:1px solid var(--line);
+  transform:translateX(102%);transition:transform .45s var(--ease);
+  display:flex;flex-direction:column;
+  padding:calc(18px + var(--safe-top)) 18px calc(18px + var(--safe-b));
+}
+.drawer.open{transform:none}
+.drawer .dhead{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
+.drawer .dhead h2{font-size:19px;font-weight:700}
+.drawer .dhead button{font-size:13px;color:var(--dim);border:1px solid var(--line);border-radius:9px;padding:8px 14px;min-height:40px}
+.drawer .dhead button:hover{color:var(--ink)}
+.ditems{flex:1;overflow-y:auto;display:flex;flex-direction:column;gap:10px}
+.ditem{
+  display:flex;gap:12px;align-items:center;
+  border:1px solid var(--line);border-radius:12px;padding:10px;background:var(--panel2);
+}
+.ditem img{width:64px;height:52px;object-fit:cover;border-radius:8px}
+.ditem .di-body{flex:1;min-width:0}
+.ditem .di-body h4{font-family:"Space Grotesk";font-weight:500;font-size:13.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ditem .di-body span{font-size:12.5px;color:var(--dim)}
+.qty{display:flex;align-items:center;gap:6px}
+.qty button{width:30px;height:30px;border:1px solid var(--line);border-radius:8px;font-size:14px}
+.qty button:hover{border-color:var(--hot);color:var(--hot)}
+.qty b{font-family:"Space Grotesk";min-width:20px;text-align:center;font-size:13.5px}
+.ditem .rm{color:var(--dim);font-size:15px;width:34px;height:34px}
+.ditem .rm:hover{color:var(--hot2)}
+.dfoot{border-top:1px solid var(--line);padding-top:14px;margin-top:10px}
+.dfoot .tot{display:flex;justify-content:space-between;font-size:14px;color:var(--dim);margin-bottom:6px}
+.dfoot .tot.grand{color:var(--ink);font-family:"Space Grotesk";font-weight:700;font-size:18px;margin-bottom:14px}
+.checkout{
+  width:100%;background:var(--plasma);color:#16130e;border-radius:12px;
+  font-family:"Space Grotesk";font-weight:700;font-size:15.5px;min-height:52px;
+  transition:filter .25s,transform .25s;
+}
+.checkout:hover{filter:brightness(1.06);transform:translateY(-1px)}
+.checkout:disabled{filter:grayscale(1) brightness(.6);cursor:not-allowed;transform:none}
+
+/* ---------- toast ---------- */
+.toast{
+  position:fixed;left:50%;bottom:calc(22px + var(--safe-b));transform:translate(-50%,80px);
+  z-index:100;background:var(--panel2);border:1px solid rgba(255,180,84,.4);
+  color:var(--ink);border-radius:12px;padding:13px 20px;font-size:13.5px;
+  opacity:0;transition:all .4s var(--ease);pointer-events:none;white-space:nowrap;
+}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+.toast b{color:var(--hot)}
+
+/* ---------- footer ---------- */
+footer{
+  border-top:1px solid var(--line);
+  padding:clamp(28px,4vw,44px) calc(var(--pad) + var(--safe-r)) calc(28px + var(--safe-b)) calc(var(--pad) + var(--safe-l));
+  display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;color:var(--dim);font-size:13.5px;
+}
+footer .cols{display:flex;gap:clamp(24px,5vw,70px);flex-wrap:wrap}
+footer h4{font-family:"Space Grotesk";font-weight:500;color:var(--ink);font-size:14px;margin-bottom:10px}
+footer li{list-style:none;margin-bottom:7px}
+footer a:hover{color:var(--hot)}
+
+@media (max-width:760px){
+  nav.top{display:none}
+  .hero h1{font-size:clamp(34px,11vw,52px)}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;transition-duration:.14s!important}
+  html{scroll-behavior:auto}
+}
+:focus-visible{outline:2px solid var(--hot);outline-offset:2px;border-radius:6px}
+</style>
+</head>
+<body>
+
+<header>
+  <a class="logo" href="#top" aria-label="NEXRIG home">
+    <span class="bolt">N</span>
+    <b>NEX<i>RIG</i></b>
+  </a>
+  <nav class="top" aria-label="Primary">
+    <a href="#catalog" class="on">Catalog</a>
+    <a href="#why">Why NEXRIG</a>
+    <a href="#deal">Deals</a>
+  </nav>
+  <div class="hdr-actions">
+    <button class="cart-btn" id="cartBtn" aria-label="Open cart">
+      🛒<span class="cart-count" id="cartCount">0</span>
+    </button>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <img class="hero-art" alt="" src="https://images.unsplash.com/photo-1542751371-adc38448a05e?w=1100&q=80">
+    <span class="kicker">⚡ Spring drop — up to 35% off battlestations</span>
+    <h1>Gear that <span class="grad">keeps up</span> with your hands.</h1>
+    <p class="sub">Pro-grade keyboards, mice, audio and display hardware — each unit stress-tested for 48 hours before it ships. No filler SKUs, no marketing specs.</p>
+    <div class="cta-row">
+      <a href="#catalog" class="btn primary">Shop the catalog</a>
+      <a href="#deal" class="btn ghost">Today's deal</a>
+    </div>
+    <div class="stats">
+      <div class="stat"><b>20k+</b><span>orders shipped</span></div>
+      <div class="stat"><b>48h</b><span>burn-in test per unit</span></div>
+      <div class="stat"><b>2 yr</b><span>warranty, no fine print</span></div>
+      <div class="stat"><b>4.8★</b><span>from 3,100 reviews</span></div>
+    </div>
+  </section>
+
+  <div class="brands" aria-hidden="true">
+    <div class="track" id="brandTrack"></div>
+  </div>
+
+  <section id="catalog">
+    <div class="sec-head">
+      <h2>The catalog</h2>
+      <span class="note">Every product photographed as shipped. Real units, real stock counts — when a number hits 3, it means 3 left.</span>
+    </div>
+    <div class="filters" id="filters" role="tablist" aria-label="Category filter"></div>
+    <div class="grid" id="grid"></div>
+    <p class="empty" id="emptyMsg" hidden>Nothing in this category right now. Try another filter.</p>
+  </section>
+
+  <section id="why">
+    <div class="sec-head">
+      <h2>Why players buy here</h2>
+    </div>
+    <div class="feats">
+      <div class="feat"><span class="ico">🔥</span><h3>48-hour burn-in</h3><p>Switches, sensors and panels are run hot for two days before dispatch. Dead-on-arrival is a policy failure, not bad luck.</p></div>
+      <div class="feat"><span class="ico">📦</span><h3>Ships in 24h</h3><p>Order before 14:00 and it leaves the warehouse the same day. Free shipping over $99.</p></div>
+      <div class="feat"><span class="ico">🛡️</span><h3>2-year warranty</h3><p>Two years, parts and labor, no receipt archaeology. Serial lookup is enough.</p></div>
+      <div class="feat"><span class="ico">↩️</span><h3>30-day returns</h3><p>Don't like the feel? Send it back within 30 days, used, and get a full refund.</p></div>
+    </div>
+  </section>
+
+  <section id="deal">
+    <div class="promo">
+      <div>
+        <h2>Battlestation bundle — keyboard, mouse and pad together.</h2>
+        <p>Buy any full-size keyboard and any mouse in one order and the pad is on us. Apply the code at checkout.</p>
+      </div>
+      <span class="code" id="promoCode">NEXRIG15</span>
+    </div>
+  </section>
+</main>
+
+<div class="scrim" id="scrim"></div>
+<aside class="drawer" id="drawer" aria-label="Shopping cart">
+  <div class="dhead">
+    <h2>Your cart</h2>
+    <button id="closeDrawer">Close</button>
+  </div>
+  <div class="ditems" id="ditems"></div>
+  <div class="dfoot">
+    <div class="tot"><span>Shipping</span><span>Free over $99</span></div>
+    <div class="tot grand"><span>Total</span><span id="grand">$0</span></div>
+    <button class="checkout" id="checkout" disabled>Checkout</button>
+  </div>
+</aside>
+
+<div class="toast" id="toast"></div>
+
+<footer>
+  <div>© 2026 NEXRIG. Built for players, tested by players.</div>
+  <div class="cols">
+    <div><h4>Shop</h4><li><a href="#catalog">Keyboards</a></li><li><a href="#catalog">Mice</a></li><li><a href="#catalog">Audio</a></li></div>
+    <div><h4>Support</h4><li><a href="#">Warranty</a></li><li><a href="#">Returns</a></li><li><a href="#">Contact</a></li></div>
+  </div>
+</footer>
+
+<script>
+(function(){
+'use strict';
+
+/* ---------- products: real Unsplash photos, verified live ---------- */
+var U = "https://images.unsplash.com/";
+var P = [
+ {id:1, name:"Vektor TKL — Hall Effect",   cat:"Keyboards", price:139, was:189, img:U+"photo-1587829741301-dc798b83add3?w=900&q=80", rating:4.9, tag:"Best seller", stock:7},
+ {id:2, name:"Karbon 65 — Gasket Mount",   cat:"Keyboards", price:96,  was:null, img:U+"photo-1618384887929-16ec33fab9ef?w=900&q=80", rating:4.7, tag:"New",         stock:14},
+ {id:3, name:"Karbon Studio — Low Profile",cat:"Keyboards", price:110, was:135, img:U+"photo-1595044426077-d36d9236d54a?w=900&q=80", rating:4.6, tag:null,          stock:9},
+ {id:4, name:"Pulse Pro Wireless Mouse",   cat:"Mice",      price:79,  was:99,  img:U+"photo-1615663245857-ac93bb7c39e7?w=900&q=80", rating:4.8, tag:"26% off",     stock:5},
+ {id:5, name:"Glide Ultralight 49g",       cat:"Mice",      price:64,  was:null, img:U+"photo-1527814050087-3793815479db?w=900&q=80", rating:4.7, tag:null,          stock:11},
+ {id:6, name:"Aether ANC Headset",         cat:"Audio",     price:129, was:159, img:U+"photo-1618366712010-f4ae9c647dcb?w=900&q=80", rating:4.8, tag:"Staff pick",  stock:3},
+ {id:7, name:"Echelon Studio Headphones",  cat:"Audio",     price:89,  was:null, img:U+"photo-1546435770-a3e426bf472b?w=900&q=80",   rating:4.5, tag:null,          stock:16},
+ {id:8, name:"Comms One Streaming Mic",    cat:"Audio",     price:74,  was:95,  img:U+"photo-1590602847861-f357a9332bbc?w=900&q=80", rating:4.6, tag:"22% off",     stock:8},
+ {id:9, name:"TRX Elite Controller",       cat:"Controllers",price:69, was:null, img:U+"photo-1592840496694-26d035b52b48?w=900&q=80", rating:4.7, tag:null,         stock:12},
+ {id:10,name:"TRX Pro — Hall Sticks",      cat:"Controllers",price:88, was:109, img:U+"photo-1600080972464-8e5f35f63d08?w=900&q=80", rating:4.9, tag:"Drift-proof", stock:4},
+ {id:11,name:"Console Pad Grip Edition",   cat:"Controllers",price:59, was:null, img:U+"photo-1592155931584-901ac15763e3?w=900&q=80", rating:4.4, tag:null,         stock:15},
+ {id:12,name:"Horizon 27\" 240Hz Monitor", cat:"Displays",  price:329, was:399, img:U+"photo-1527443224154-c4a3942d3acf?w=900&q=80", rating:4.8, tag:"Flagship",    stock:3},
+ {id:13,name:"Field 25\" 165Hz IPS",       cat:"Displays",  price:199, was:null, img:U+"photo-1586210579191-33b45e38fa2c?w=900&q=80", rating:4.6, tag:null,          stock:6},
+ {id:14,name:"Rig Chair — Mesh Pro",       cat:"Gear",      price:289, was:349, img:U+"photo-1589041127168-9b1915731dc3?w=900&q=80", rating:4.7, tag:"17% off",     stock:5},
+ {id:15,name:"Rig Mat XXL Speed",          cat:"Gear",      price:29,  was:null, img:U+"photo-1616763355603-9755a640a287?w=900&q=80", rating:4.5, tag:null,          stock:40},
+ {id:16,name:"Nexus RTX Rig — Prebuilt",   cat:"Gear",      price:1899,was:2199,img:U+"photo-1591488320449-011701bb6704?w=900&q=80", rating:4.9, tag:"Limited",     stock:2},
+ {id:17,name:"Player One Headset Stand",   cat:"Gear",      price:34,  was:null, img:U+"photo-1613040809024-b4ef7ba99bc3?w=900&q=80", rating:4.3, tag:null,          stock:22},
+ {id:18,name:"Cadence Desk Speakers",      cat:"Audio",     price:118, was:139, img:U+"photo-1608043152269-423dbba4e7e1?w=900&q=80", rating:4.6, tag:null,          stock:7}
+];
+var CATS = ["All","Keyboards","Mice","Audio","Controllers","Displays","Gear"];
+
+var $=function(s){return document.querySelector(s)};
+var grid=$("#grid"), filters=$("#filters"), ditems=$("#ditems");
+var cart={}; /* id -> qty, persisted */
+
+/* ---------- marquee ---------- */
+var brandNames=["HALL EFFECT","240HZ","GASKET MOUNT","ULTRALIGHT","ANC","DRIFT-PROOF","PPM 1000","HOT-SWAP","ALUMINUM","PBT"];
+var track=$("#brandTrack");
+track.innerHTML=(brandNames.concat(brandNames)).map(function(b){return "<span>"+b+"</span>"}).join("");
+
+/* ---------- filters ---------- */
+var activeCat="All";
+filters.innerHTML=CATS.map(function(c){
+  return '<button class="chip'+(c==="All"?" on":"")+'" data-cat="'+c+'" role="tab">'+c+'</button>';
+}).join("");
+filters.addEventListener("click",function(e){
+  var b=e.target.closest(".chip");if(!b)return;
+  filters.querySelectorAll(".chip").forEach(function(x){x.classList.remove("on")});
+  b.classList.add("on");
+  activeCat=b.getAttribute("data-cat");
+  render();
+});
+
+/* ---------- product cards ---------- */
+var money=function(n){return "$"+n.toFixed(n%1?2:0)};
+function render(){
+  var list=P.filter(function(p){return activeCat==="All"||p.cat===activeCat});
+  grid.innerHTML=list.map(function(p){
+    var low=p.stock<=3?'<div class="stock-low">Only '+p.stock+' left</div>':"";
+    return '<article class="pcard" data-id="'+p.id+'" tabindex="0" aria-label="'+p.name+', '+money(p.price)+'">'+
+      '<div class="ph"><img loading="lazy" src="'+p.img+'" alt="'+p.name+'">'+
+      (p.tag?'<span class="tag">'+p.tag+'</span>':"")+'</div>'+
+      '<div class="body">'+
+        '<span class="cat">'+p.cat+'</span>'+
+        '<h3>'+p.name+'</h3>'+
+        '<span class="rate">★ '+p.rating.toFixed(1)+'</span>'+low+
+        '<div class="row"><span class="price">'+money(p.price)+(p.was?"<s>"+money(p.was)+"</s>":"")+'</span>'+
+        '<button class="add" data-add="'+p.id+'" aria-label="Add '+p.name+' to cart">+</button></div>'+
+      '</div></article>';
+  }).join("");
+  $("#emptyMsg").hidden=list.length>0;
+}
+render();
+
+grid.addEventListener("click",function(e){
+  var add=e.target.closest("[data-add]");
+  if(add){addToCart(parseInt(add.getAttribute("data-add")));return;}
+  var card=e.target.closest(".pcard");
+  if(card)addToCart(parseInt(card.getAttribute("data-id")));
+});
+grid.addEventListener("keydown",function(e){
+  if(e.key==="Enter"){var c=e.target.closest(".pcard");if(c)addToCart(parseInt(c.getAttribute("data-id")));}
+});
+
+/* ---------- cart ---------- */
+try{cart=JSON.parse(localStorage.getItem("nexrig_cart")||"{}")}catch(e){cart={}}
+function save(){localStorage.setItem("nexrig_cart",JSON.stringify(cart))}
+function findP(id){return P.find(function(p){return p.id===id})}
+
+function addToCart(id){
+  cart[id]=(cart[id]||0)+1;save();renderDrawer();toast("<b>"+findP(id).name+"</b> added to cart");
+}
+function setQty(id,q){
+  if(q<=0)delete cart[id];else cart[id]=q;
+  save();renderDrawer();
+}
+function cartTotal(){
+  var n=0,t=0;
+  Object.keys(cart).forEach(function(k){n+=cart[k];t+=cart[k]*findP(+k).price;});
+  return {n:n,t:t};
+}
+function renderDrawer(){
+  var ids=Object.keys(cart);
+  var c=cartTotal();
+  var cc=$("#cartCount");
+  cc.textContent=c.n;cc.classList.toggle("show",c.n>0);
+  ditems.innerHTML=ids.length?ids.map(function(k){
+    var p=findP(+k);
+    return '<div class="ditem"><img src="'+p.img+'" alt="">'+
+      '<div class="di-body"><h4>'+p.name+'</h4><span>'+money(p.price)+'</span></div>'+
+      '<div class="qty"><button data-q="-1" data-id="'+k+'">−</button><b>'+cart[k]+'</b><button data-q="1" data-id="'+k+'">+</button></div>'+
+      '<button class="rm" data-rm="'+k+'" aria-label="Remove '+p.name+'">✕</button></div>';
+  }).join(""):'<p class="empty">Cart is empty.<br>Find something loud.</p>';
+  $("#grand").textContent=money(c.t);
+  $("#checkout").disabled=!ids.length;
+}
+ditems.addEventListener("click",function(e){
+  var q=e.target.closest("[data-q]");
+  if(q){var id=+q.getAttribute("data-id");setQty(id,(cart[id]||0)+(+q.getAttribute("data-q")));return;}
+  var rm=e.target.closest("[data-rm]");
+  if(rm){setQty(+rm.getAttribute("data-rm"),0);}
+});
+
+/* drawer open/close */
+var drawer=$("#drawer"),scrim=$("#scrim");
+function setDrawer(open){
+  drawer.classList.toggle("open",open);
+  scrim.classList.toggle("on",open);
+  document.body.style.overflow=open?"hidden":"";
+}
+$("#cartBtn").addEventListener("click",function(){renderDrawer();setDrawer(true)});
+$("#closeDrawer").addEventListener("click",function(){setDrawer(false)});
+scrim.addEventListener("click",function(){setDrawer(false)});
+$("#checkout").addEventListener("click",function(){
+  var c=cartTotal();
+  toast("Demo checkout — <b>"+c.n+"</b> item(s), <b>"+money(c.t)+"</b>. No real charge.");
+});
+
+/* ---------- toast ---------- */
+var toastT=null;
+function toast(html){
+  var el=$("#toast");el.innerHTML=html;el.classList.add("show");
+  clearTimeout(toastT);toastT=setTimeout(function(){el.classList.remove("show")},2300);
+}
+
+renderDrawer();
+})();
+</script>
+</body>
+</html>
