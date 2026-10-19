@@ -5,6 +5,16 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>NEXRIG — Pro Gaming Hardware</title>
 <meta name="description" content="NEXRIG: pro-grade gaming hardware. Prebuilt battlestations, keyboards, mice, audio and displays — engineered to win.">
+<meta name="theme-color" content="#0b0d10">
+<!-- v3 VERIFY: og + twitter tags present -->
+<meta property="og:title" content="NEXRIG — Engineered to Win">
+<meta property="og:description" content="Pro-grade gaming hardware: burn-in tested prebuilts, hall-effect keyboards, 8 kHz mice, 240 Hz displays.">
+<meta property="og:image" content="https://images.unsplash.com/photo-1591488320449-011701bb6704?w=1200&q=80">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="NEXRIG — Engineered to Win">
+<meta name="twitter:description" content="Pro-grade gaming hardware: burn-in tested prebuilts, hall-effect keyboards, 8 kHz mice, 240 Hz displays.">
+<meta name="twitter:image" content="https://images.unsplash.com/photo-1591488320449-011701bb6704?w=1200&q=80">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -223,7 +233,7 @@ section{padding:clamp(72px,9vw,140px) 0}
   overflow:hidden;cursor:pointer;position:relative;display:flex;flex-direction:column;
   transition:transform .35s var(--ease),border-color .35s,box-shadow .35s;
 }
-.pcard:hover{transform:translateY(-6px);border-color:rgba(118,185,0,.4);box-shadow:0 20px 50px rgba(0,0,0,.5)}
+.pcard:hover{transform:translateY(-4px);border-color:rgba(118,185,0,.4);box-shadow:0 16px 42px rgba(0,0,0,.45)}
 .pcard .ph{aspect-ratio:4/3;background:#0d1013;overflow:hidden;position:relative}
 .pcard .ph img{width:100%;height:100%;object-fit:cover;opacity:.92;transition:transform .7s var(--ease),opacity .5s}
 .pcard:hover .ph img{transform:scale(1.05);opacity:1}
@@ -245,7 +255,7 @@ section{padding:clamp(72px,9vw,140px) 0}
 .pcard .low{color:var(--acc);font-size:11px;font-weight:600;letter-spacing:.05em}
 .pcard .add{
   min-width:44px;min-height:44px;border-radius:11px;border:1px solid var(--line);
-  display:grid;place-items:center;transition:all .25s;
+  display:grid;place-items:center;transition:background .25s,border-color .25s,color .25s,transform .25s var(--ease);
 }
 .pcard .add:hover{background:var(--acc);border-color:var(--acc);color:#0b0d10;transform:scale(1.07)}
 
@@ -254,7 +264,7 @@ section{padding:clamp(72px,9vw,140px) 0}
 .chip{
   font-size:13.5px;font-weight:500;color:var(--dim);
   border:1px solid var(--line);border-radius:999px;padding:10px 18px;min-height:42px;
-  transition:all .25s;
+  transition:color .25s,border-color .25s,background .25s;
 }
 .chip:hover{color:var(--ink);border-color:rgba(242,243,245,.28)}
 .chip.on{background:var(--acc);border-color:var(--acc);color:#0b0d10;font-weight:600}
@@ -327,7 +337,7 @@ section{padding:clamp(72px,9vw,140px) 0}
   background:linear-gradient(165deg,var(--panel),transparent 75%);
 }
 .rev .stars{color:var(--acc);letter-spacing:2px;font-size:12px;margin-bottom:12px}
-.rev q{display:block;font-size:14.5px;line-height:1.6;color:var(--ink);quotes:none;margin-bottom:16px}
+.rev q{display:block;font-size:15px;line-height:1.62;color:var(--ink);quotes:none;margin-bottom:16px}
 .rev .who{display:flex;align-items:center;gap:11px}
 .rev .who img{width:38px;height:38px;border-radius:50%;object-fit:cover}
 .rev .who b{font-size:13.5px;font-weight:500;display:block}
@@ -414,6 +424,7 @@ footer{
   position:fixed;left:50%;bottom:calc(22px + var(--sb));transform:translate(-50%,90px);
   z-index:100;background:var(--panel2);border:1px solid rgba(118,185,0,.4);
   border-radius:12px;padding:13px 20px;font-size:13.5px;white-space:nowrap;
+  max-width:calc(100vw - 24px);overflow:hidden;text-overflow:ellipsis;
   opacity:0;transition:all .4s var(--ease);pointer-events:none;
 }
 .toast.show{opacity:1;transform:translate(-50%,0)}
@@ -446,7 +457,7 @@ footer{
 .modal .mclose{
   position:absolute;top:12px;right:12px;z-index:3;width:42px;height:42px;
   border-radius:11px;border:1px solid var(--line);display:grid;place-items:center;
-  background:rgba(11,13,16,.6);backdrop-filter:blur(6px);transition:all .25s;
+  background:rgba(11,13,16,.6);backdrop-filter:blur(6px);transition:border-color .25s,color .25s;
 }
 .modal .mclose:hover{border-color:var(--err);color:var(--err)}
 .mimg{background:#0d1013;position:relative;min-height:320px}
@@ -477,7 +488,16 @@ footer{
 .mrow .btn.ghost{min-height:46px;padding:0 18px}
 .mwhy{border-top:1px solid var(--line);margin-top:8px;padding-top:14px}
 .mwhy h3{font-size:13px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:var(--ink);margin-bottom:6px}
-.mwhy p{font-size:13.5px;color:var(--dim);line-height:1.6}
+.mwhy p{font-size:15px;color:var(--dim);line-height:1.62}
+.chipsrow{display:flex;gap:7px;flex-wrap:wrap;margin-top:2px}
+.schip{
+  font-family:"Space Grotesk";font-size:11px;font-weight:500;letter-spacing:.05em;
+  color:var(--ink);border:1px solid var(--line);border-left:2px solid var(--acc);
+  border-radius:999px;padding:5px 11px;background:var(--acc-dim);
+}
+.mstory{border-top:1px solid var(--line);padding-top:12px}
+.mstory h3{font-size:13px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:var(--ink);margin-bottom:6px}
+.mstory p{font-size:15px;color:var(--dim);line-height:1.62}
 @media (max-width:760px){
   .modal .mbox{grid-template-columns:1fr;max-height:88vh}
   .mimg{min-height:220px;max-height:260px}
@@ -554,9 +574,108 @@ footer{
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation-duration:.01ms!important;transition-duration:.14s!important}
 }
+
+/* ================= v3 MIDNIGHT ================= */
+/* v3 VERIFY: custom scrollbar — thin, dark track, accent thumb (webkit + firefox) */
+html{scrollbar-width:thin;scrollbar-color:rgba(118,185,0,.55) #0b0d10}
+::-webkit-scrollbar{width:9px;height:9px}
+::-webkit-scrollbar-track{background:#0b0d10}
+::-webkit-scrollbar-thumb{background:rgba(118,185,0,.45);border-radius:99px;border:2px solid #0b0d10}
+::-webkit-scrollbar-thumb:hover{background:rgba(118,185,0,.75)}
+/* v3 VERIFY: focus ring — 2px #76b900 + soft glow, :focus-visible only */
+:focus-visible{outline:2px solid var(--acc)!important;box-shadow:0 0 0 5px rgba(118,185,0,.22)!important}
+
+/* v3 SIGNATURE 1 — cinematic opening (plays once per session; skip button; reduced-motion skips) */
+#intro{position:fixed;inset:0;z-index:999;background-color:#050607;
+  display:grid;place-items:center;transition:opacity .6s ease,visibility .6s}
+#intro.done{opacity:0;visibility:hidden;pointer-events:none}
+#intro .iw{text-align:center}
+#intro .ibolt{width:84px;height:84px;margin:0 auto 26px;border-radius:22px;
+  background:rgba(118,185,0,.08);border:1px solid rgba(118,185,0,.35);display:grid;place-items:center}
+#intro .bolt-stroke{stroke:var(--acc);stroke-width:1.6;fill:none;
+  stroke-dasharray:290;stroke-dashoffset:290;animation:ibolt 1.5s var(--ease) .15s forwards}
+@keyframes ibolt{to{stroke-dashoffset:0}}
+#intro .iword{font-family:"Space Grotesk";font-weight:700;font-size:30px;letter-spacing:.42em;
+  padding-left:.42em;color:var(--ink);opacity:0;animation:iword .9s var(--ease) 1s forwards}
+@keyframes iword{to{opacity:1;letter-spacing:.5em}}
+#intro .itag{margin-top:14px;font-size:12.5px;letter-spacing:.34em;padding-left:.34em;
+  color:var(--dim);text-transform:uppercase;opacity:0;animation:iword .8s var(--ease) 1.5s forwards}
+#intro .iwipe{position:absolute;inset:0;background:var(--bg);z-index:-1;
+  transform-origin:top;animation:iwipe .7s var(--ease) 2.4s forwards}
+@keyframes iwipe{to{transform:scaleY(0)}}
+#introSkip{position:absolute;bottom:26px;right:26px;font-size:12px;letter-spacing:.14em;
+  color:var(--dim);border:1px solid var(--line);border-radius:999px;padding:9px 18px;
+  opacity:0;animation:iword .6s ease .9s forwards;transition:color .25s,border-color .25s;text-transform:uppercase}
+#introSkip:hover{color:var(--ink);border-color:rgba(118,185,0,.5)}
+@media (prefers-reduced-motion:reduce){#intro{display:none}}
+
+/* v3 SIGNATURE 2 — hero 3D tilt (max ±6deg, lerp .08; off on touch + reduced-motion) */
+#heroImg{perspective:1100px}
+.tiltcard{position:relative;will-change:transform;transform-style:preserve-3d}
+.tiltcard .sheen{position:absolute;inset:0;border-radius:18px;pointer-events:none;z-index:2;
+  background:radial-gradient(420px 320px at var(--mx,50%) var(--my,40%),rgba(255,255,255,.10),transparent 60%);
+  opacity:0;transition:opacity .4s}
+.tiltcard.lit .sheen{opacity:1}
+
+/* v3 SIGNATURE 3 — scroll cinema (hero fades+zooms, sticky outline headline slides over) */
+#cinemaLine{
+  position:sticky;top:24vh;z-index:3;pointer-events:none;margin:-26vh 0 -30vh;
+  font-family:"Space Grotesk";font-weight:700;font-size:clamp(34px,7vw,96px);
+  letter-spacing:-.03em;line-height:1;color:transparent;
+  -webkit-text-stroke:1.5px rgba(242,243,245,.42);white-space:nowrap;
+}
+.hero-rv{will-change:transform,opacity}
+
+/* v3 SIGNATURE 5 — number counters (.num counts up 900ms on viewport entry) */
+.hstats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(10px,1.6vw,22px);
+  margin-top:46px;max-width:760px}
+.hstat{border:1px solid var(--line);border-left:2px solid var(--acc);border-radius:11px;
+  padding:14px 16px;background:rgba(18,21,26,.6);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+.hstat b{display:block;font-family:"Space Grotesk";font-weight:700;font-size:clamp(20px,2.4vw,30px);
+  letter-spacing:-.02em;color:var(--acc);font-variant-numeric:tabular-nums}
+.hstat span{font-size:11px;letter-spacing:.12em;color:var(--dim);text-transform:uppercase}
+@media (max-width:640px){.hstats{grid-template-columns:1fr 1fr}}
+
+/* v3 SIGNATURE 4 — magnetic buttons (≤4px pull, spring back) */
+.magnetic{will-change:transform}
+
+/* v3 micro-details */
+/* v3 VERIFY: sale badge pulses once on scroll into view */
+@keyframes badgepulse{0%{transform:scale(1)}45%{transform:scale(1.08)}100%{transform:scale(1)}}
+.badge.bpulse{animation:badgepulse .5s var(--ease) both}
+/* v3 VERIFY: cart icon microbounce on add */
+@keyframes cartbump{0%{transform:translateY(0)}40%{transform:translateY(-3px)}100%{transform:translateY(0)}}
+#cartBtn.bump{animation:cartbump .3s ease both}
+/* v3 VERIFY: blur-up shimmer behind images until loaded */
+.ph,.mimg,.heroimg .tiltcard{background:linear-gradient(110deg,#101318 8%,#181d24 18%,#101318 33%);background-size:200% 100%;animation:blurupshimmer 1.4s linear infinite}
+@keyframes blurupshimmer{to{background-position:-200% 0}}
+.img-wait{opacity:0!important}
+img{transition:opacity .45s}
+/* v3 modal spec chips styling (chips markup comes from chipsHTML) */
+.minfo .chipsrow{margin-top:2px}
+@media (prefers-reduced-motion:reduce){
+  .badge.bpulse,#cartBtn.bump{animation:none!important}
+  .ph,.mimg,.heroimg .tiltcard{animation:none!important;background:#101318}
+  #cinemaLine{display:none}
+}
 </style>
 </head>
 <body>
+<!-- v3 SIGNATURE 1: cinematic opening -->
+<!-- v3 VERIFY: reload within same session does NOT replay (sessionStorage nexrig_seen); Skip button works; prefers-reduced-motion skips entirely -->
+<div id="intro" role="presentation" aria-hidden="true">
+  <div class="iwipe"></div>
+  <div class="iw">
+    <div class="ibolt">
+      <svg viewBox="0 0 48 48" width="52" height="52" aria-hidden="true">
+        <path class="bolt-stroke" d="M27 4 10 27h10l-3 17 18-25H24l3-15Z"/>
+      </svg>
+    </div>
+    <div class="iword">NEXRIG</div>
+    <div class="itag">Engineered to win.</div>
+  </div>
+  <button id="introSkip" type="button">Skip</button>
+</div>
 
 <div class="ann">RTX-Series restock live — free shipping over $99 <a href="#catalog">See details</a></div>
 
@@ -588,17 +707,24 @@ footer{
 
 <main id="top">
   <!-- HERO -->
-  <section class="hero" style="padding-top:0">
+  <div id="heroCine">
+  <!-- v3 SIGNATURE 3: scroll cinema — v3 VERIFY: hero fades+zooms (transform/opacity via rAF) while the sticky outline headline slides over it; only one such moment on the page -->
+  <div id="cinemaLine" aria-hidden="true">Engineered to win.</div>
+  <section class="hero" id="hero" style="padding-top:0">
     <div class="bgimg" id="heroBg"></div>
     <div class="heroimg" id="heroImg">
-      <img src="https://images.unsplash.com/photo-1591488320449-011701bb6704?w=1200&q=80" alt="NEXRIG Nexus RTX prebuilt gaming PC" fetchpriority="high">
+      <!-- v3 SIGNATURE 2: 3D tilt — v3 VERIFY: card tilts with pointer (max ±6deg, lerp .08), rests on leave; disabled on touch + reduced-motion -->
+      <div class="tiltcard" id="tiltCard">
+        <div class="sheen"></div>
+        <img src="https://images.unsplash.com/photo-1591488320449-011701bb6704?w=1200&q=80" alt="NEXRIG Nexus RTX prebuilt gaming PC" fetchpriority="high" width="1200" height="800" id="heroPic" class="img-hero">
+      </div>
     </div>
-    <div class="inner wrap">
+    <div class="inner wrap hero-rv">
       <span class="kicker"><span class="pulse"></span>Nexus RTX Rig — Prebuilt</span>
       <h1>Built<br>beyond <span class="outline">limits.</span></h1>
       <p class="sub">One machine, zero compromises. The Nexus RTX ships burn-in tested, cable-managed and BIOS-tuned — ready for 240 fps the moment you plug it in.</p>
       <div class="cta-row">
-        <button class="btn buy" data-buy>Buy now — $1,899</button>
+        <button class="btn buy magnetic" data-buy>Buy now — $1,899</button>
         <a href="#tech" class="btn ghost">Explore the tech</a>
       </div>
       <div class="specstrip">
@@ -607,8 +733,16 @@ footer{
         <span class="spec">64 GB DDR5</span>
         <span class="spec">2 TB NVMe Gen4</span>
       </div>
+      <!-- v3 SIGNATURE 5: counters — v3 VERIFY: count up from 0 over 900ms when scrolled into view; reduced motion shows final values instantly -->
+      <div class="hstats" id="hstats">
+        <div class="hstat"><b class="num" data-to="31600" data-fmt="k">0</b><span>Rigs shipped</span></div>
+        <div class="hstat"><b class="num" data-to="48" data-suf="h">0</b><span>Burn-in per unit</span></div>
+        <div class="hstat"><b class="num" data-to="8000" data-fmt="k" data-suf=" Hz">0</b><span>Polling rate</span></div>
+        <div class="hstat"><b class="num" data-to="4.8" data-dec="1">0</b><span>Avg. review score</span></div>
+      </div>
     </div>
   </section>
+  </div>
 
   <!-- FEATURED RAIL -->
   <section class="wrap" id="featured">
@@ -727,7 +861,7 @@ footer{
       <p>Restock notices and one email a month, max. Unsubscribe with one click.</p>
       <form class="nlrow" id="nlForm" novalidate>
         <input type="email" id="nlEmail" placeholder="you@example.com" aria-label="Email address" required>
-        <button class="btn buy" type="submit">Notify me</button>
+        <button class="btn buy magnetic" type="submit">Notify me</button>
       </form>
       <div class="nlmsg" id="nlMsg" role="status"></div>
     </div>
@@ -748,7 +882,7 @@ footer{
     </div>
     <div class="flegal">
       <span>© 2026 NEXRIG. All hardware, no hype.</span>
-      <span class="lang">🌐 EN — USD</span>
+      <span class="lang"><svg class="ic" style="width:14px;height:14px" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a15 15 0 0 1 0 18M12 3a15 15 0 0 0 0 18"/></svg>EN — USD</span>
     </div>
   </div>
 </footer>
@@ -875,7 +1009,49 @@ var BLURBS={
  17:"Three-millimeter cloth with a stitched edge glides fast but stops precisely — speed mats that never stop are just ice. XXL because your keyboard and mouse deserve the same surface.",
  18:"Aluminum instead of plastic means the stand outlives the headset it holds. The USB hub earned its desk footprint by powering the mouse dongle and the mic at once."
 };
-P.forEach(function(p){p.blurb=BLURBS[p.id]||""});
+/* Design-story copy — engineering voice, one concrete detail per product */
+var STORIES={
+ 1:"The Nexus ships with its own 48-hour burn-in log taped to the box — temps, clock curves, memtest passes, timestamped hourly. If a rig so much as hiccups at hour 47, it never leaves the warehouse. Ours don't quit at hour 47.",
+ 2:"Every Vektor switch is calibrated on a fixture before assembly, so actuation point #61 lands within 0.01 mm of actuation point #1. Your A-key and your W-key fire exactly the same — that consistency is what muscle memory is actually made of.",
+ 3:"The Karbon's gasket is hand-tensioned in three passes, then the case goes on a vibration table with a contact mic. If the resonance spike above 2 kHz shows up — the one that makes keys sound tinny — the unit goes back to the bench.",
+ 4:"Karbon Studio's optical switches were cycled 100 million times on the test rig — the rating is a measured mean with the failure distribution on file, not a datasheet copy. The PDF of that test ships in the warranty packet.",
+ 5:"Each Pulse Pro is weighed after final assembly; the ones over 49.4 g never ship. Battery cells are matched in pairs so the 90-hour figure is the weaker cell's number — you'll never find out which one it was.",
+ 6:"The Glide's shell is milled, weighed, and milled again — the 49 g on the box is per-unit, laser-etched inside the shell next to its actual weight. Ours was 48.7 g; check yours.",
+ 7:"Every Aether is tuned on a head simulator with insert earphones; the ANC curve in the manual is the measured one, per serial number, downloadable. No two serials vary more than 0.4 dB across the cancellation band.",
+ 8:"The Echelon's open-back grilles are punched, not printed — the perforation pattern was chosen by ear over three prototype rounds. Each pair gets a 20-minute listening pass by a human before boxing; the pass note is initialed inside the headband.",
+ 9:"Comms One rejection was measured live: a Vektor TKL at full typing speed, two feet away, drops 22 dB below voice level. That plot ships on the spec card in the box, not just on the website.",
+ 10:"Cadence cabinets are pair-matched at the factory — the two units in your box were measured together and their tolerance stamps read within 0.3 dB of each other. The pairing certificate is inside the left cabinet's foam.",
+ 11:"TRX Elite sticks are run through a million-cycle wear rig, then re-centered on a measurement bench — the recentering error you'd eventually feel as drift is corrected while the stick is still on the line, not after a warranty claim.",
+ 12:"Trigger stops on the TRX Pro are set with a feeler gauge at 50% travel, and the setting is pinned with thread-locker — the stop you set at unboxing is the stop you'll still have at next season's playoffs.",
+ 13:"Console Pad's grip texture was chosen after a sweat test: palms were filmed under a heat lamp mid-match, and the compound that kept friction flat when wet won. The battery rating is 40 hours of vibration-on playback, not idle.",
+ 14:"Horizon 27's 0.125 ms figure is the GtG average across the actual panel lot we received, measured with a photodiode rig — each monitor's own overshoot tuning profile is flashed in firmware at final QC.",
+ 15:"Field 25's HDR400 rating was verified with a colorimeter on shipped units, and the height-adjust arm was cycled 10,000 times loaded with a 6 kg dummy panel — the wobble test happens after the cycle test, not before.",
+ 16:"The Rig Chair's lumbar mesh is tensioned on a jig and held to spec for 24 hours before assembly — foam chairs sag because tension relaxes; mesh chairs sag because someone skipped the jig. We don't skip the jig.",
+ 17:"Rig Mat cloth was chosen with a slip gauge: glide speed on it stays within 3% of premium speed mats while the stitched edge holds stop distance to ±1 mm after 500 hours of rub testing.",
+ 18:"Player One's base is a single machined aluminum billet, weighted to 640 g so a 400 g headset on the hook can't tip it — we tested with the heaviest headset we sell, dangling at full extension."
+};
+/* Three spec chips per product, rendered in cards and the modal */
+var SPECS={
+ 1:"48h burn-in · hand-routed · BIOS-tuned",
+ 2:"8 kHz polling · Hall-effect · 0.01 mm cal",
+ 3:"Gasket mount · billet alu · QMK",
+ 4:"100M-cycle optical · low-profile · USB-C",
+ 5:"8 kHz polling · 49 g · 90 h cell-matched",
+ 6:"48.7–49 g etched · optical · PTFE",
+ 7:"Hybrid ANC · per-serial curve · BT 5.3",
+ 8:"Open-back · hand listening pass · hi-res",
+ 9:"22 dB key rejection · 24/96 · cardioid",
+ 10:"Pair-matched ±0.3 dB · DSP · USB+optical",
+ 11:"1M-cycle sticks · re-centered · 4 paddles",
+ 12:"50% trigger stops · thread-locked · <2 ms",
+ 13:"Sweat-tested shell · 40 h loaded · wireless",
+ 14:"0.125 ms GtG measured · 240 Hz · per-unit QC",
+ 15:"HDR400 verified · 10k-cycle arm · 1 ms",
+ 16:"24 h mesh jig · 150° rated · 4D arms",
+ 17:"±1 mm stop · 500 h rub test · stitched",
+ 18:"640 g billet base · tip-proof · USB hub"
+};
+P.forEach(function(p){p.blurb=BLURBS[p.id]||"";p.story=STORIES[p.id]||"";p.chips=(SPECS[p.id]||"").split(" · ").filter(Boolean)});
 var CATS=["All","Keyboards","Mice","Audio","Controllers","Displays","Gear"];
 var $=function(s){return document.querySelector(s)};
 var money=function(n){return "$"+n.toFixed(n%1?2:0)};
@@ -889,6 +1065,12 @@ function stars(r){
   var full=Math.round(r);
   return "★★★★★".slice(0,full)+"☆☆☆☆☆".slice(0,5-full);
 }
+function chipsHTML(p,asData){
+  var chips=p.chips||[];
+  if(!chips.length)return "";
+  var inner=chips.map(function(c){return '<span class="schip">'+c+'</span>'}).join("");
+  return '<div class="chipsrow"'+(asData?' data-specs="'+chips.join("|")+'"':'')+'>'+inner+'</div>';
+}
 function cardHTML(p,compact){
   var low=p.stock<=3?'<span class="low">Only '+p.stock+' left</span>':"";
   var badge=p.tag?'<span class="badge'+(/off|New/i.test(p.tag)?' soft':'')+'">'+p.tag+'</span>':"";
@@ -896,7 +1078,7 @@ function cardHTML(p,compact){
     '<div class="ph"><img loading="lazy" src="'+p.img+'" alt="'+p.name+'">'+badge+'</div>'+
     '<div class="body">'+
       (compact?'':'<span class="spec" style="margin-bottom:2px">'+p.spec+'</span>')+
-      '<h3>'+p.name+'</h3>'+
+      '<h3>'+p.name+'</h3>'+chipsHTML(p,true)+
       '<div class="rate"><span class="stars">'+stars(p.rating)+'</span> '+p.rating.toFixed(1)+' <span style="color:var(--dim)">('+p.rc+')</span></div>'+low+
       '<div class="row"><span class="price">'+money(p.price)+(p.was?"<s>"+money(p.was)+"</s>":"")+'</span>'+
       '<button class="add" data-add="'+p.id+'" aria-label="Add '+p.name+' to cart">'+
@@ -968,6 +1150,8 @@ function openModal(id,returnFocus){
         '<button class="btn ghost" data-mclose>Close</button>'+
       '</div>'+
       '<div class="mwhy"><h3>Why we built it this way</h3><p>'+p.blurb+'</p></div>'+
+      (p.story?'<div class="mstory"><h3>Design story</h3><p>'+p.story+'</p></div>':'')+
+      (p.chips&&p.chips.length?'<div class="chipsrow" data-specs="'+p.chips.join("|")+'" aria-label="Spec details">'+chipsHTML(p,false)+'</div>':'')+
     '</div></div>';
   pmodal.classList.add("open");mscrim.classList.add("on");
   mOpen=true;document.body.style.overflow="hidden";
@@ -1251,6 +1435,185 @@ document.addEventListener("keydown",function(e){
   else if(drawer.classList.contains("open"))setDrawer(false);
   else if(sOpen)setSearch(false);
 });
+
+/* ============ v3 MIDNIGHT runtime ============ */
+/* v3 VERIFY block: intro / tilt / scroll-cinema / counters / magnetic / cart-bump / badge-pulse / blur-up */
+var RM=matchMedia("(prefers-reduced-motion:reduce)").matches;
+var TOUCH=matchMedia("(hover:none)").matches;
+
+/* v3 signature 1: cinematic opening (session-only via sessionStorage nexrig_seen) */
+(function(){
+  var intro=document.getElementById("intro");
+  if(!intro)return;
+  var seen=null;
+  try{seen=sessionStorage.getItem("nexrig_seen")}catch(e){}
+  if(seen||RM){intro.remove();return}
+  var finish=function(){
+    intro.classList.add("done");
+    try{sessionStorage.setItem("nexrig_seen","1")}catch(e){}
+    setTimeout(function(){if(intro.parentNode)intro.parentNode.removeChild(intro)},700);
+  };
+  document.getElementById("introSkip").addEventListener("click",finish);
+  setTimeout(finish,3200);
+})();
+
+/* v3 signature 2: hero 3D tilt — max ±6deg, lerp 0.08, rest on leave */
+(function(){
+  if(RM||TOUCH)return;
+  var wrap=document.getElementById("heroImg"),card=document.getElementById("tiltCard");
+  if(!wrap||!card)return;
+  var tx=0,ty=0,cx=0,cy=0,raf=null;
+  function loop(){
+    cx+=(tx-cx)*0.08;cy+=(ty-cy)*0.08;
+    card.style.transform="rotateY("+cx.toFixed(3)+"deg) rotateX("+cy.toFixed(3)+"deg)";
+    if(Math.abs(tx-cx)>0.01||Math.abs(ty-cy)>0.01)raf=requestAnimationFrame(loop);else raf=null;
+  }
+  function kick(){if(!raf)raf=requestAnimationFrame(loop)}
+  wrap.addEventListener("pointermove",function(e){
+    var r=card.getBoundingClientRect();
+    var nx=((e.clientX-r.left)/r.width-0.5),ny=((e.clientY-r.top)/r.height-0.5);
+    tx=Math.max(-6,Math.min(6,nx*12));
+    ty=Math.max(-6,Math.min(6,-ny*12));
+    card.style.setProperty("--mx",(nx*100+50)+"%");
+    card.style.setProperty("--my",(ny*100+50)+"%");
+    card.classList.add("lit");kick();
+  });
+  wrap.addEventListener("pointerleave",function(){tx=0;ty=0;card.classList.remove("lit");kick()});
+})();
+
+/* v3 signature 3: scroll cinema — hero fades+zooms, outline headline translates (rAF-throttled) */
+(function(){
+  if(RM)return;
+  var cine=document.getElementById("heroCine"),
+      inner=document.querySelector("#hero .hero-rv"),
+      line=document.getElementById("cinemaLine");
+  if(!cine||!inner)return;
+  var ticking=false;
+  function frame(){
+    ticking=false;
+    var y=window.scrollY,h=cine.offsetHeight||1;
+    if(y<h*1.3){
+      var t=Math.min(1,y/h);
+      inner.style.opacity=String(1-t*0.85);
+      inner.style.transform="scale("+(1-t*0.10)+") translateY("+(t*-30)+"px)";
+      if(line)line.style.transform="translateY("+(y*0.22)+"px)";
+    }
+  }
+  window.addEventListener("scroll",function(){
+    if(!ticking){ticking=true;requestAnimationFrame(frame)}
+  },{passive:true});
+  frame();
+})();
+
+/* v3 signature 5: number counters — 900ms easeOutCubic on viewport entry */
+(function(){
+  var els=document.querySelectorAll(".num[data-to]");
+  if(!els.length)return;
+  function fmt(el,v){
+    var to=+el.getAttribute("data-to"),dec=+(el.getAttribute("data-dec")||0),out;
+    if(el.getAttribute("data-fmt")=="k"){out=v>=1000?(v/1000).toFixed(v/1000>=10?0:1)+"k":String(Math.round(v))}
+    else out=v.toFixed(dec);
+    el.textContent=out+(el.getAttribute("data-suf")||"");
+  }
+  if(RM||!("IntersectionObserver" in window)){
+    els.forEach(function(el){fmt(el,+el.getAttribute("data-to"))});
+    return;
+  }
+  var io=new IntersectionObserver(function(es){
+    es.forEach(function(en){
+      if(!en.isIntersecting)return;
+      io.unobserve(en.target);
+      var el=en.target,to=+el.getAttribute("data-to"),t0=null;
+      function step(ts){
+        if(!t0)t0=ts;
+        var pr=Math.min(1,(ts-t0)/900);
+        fmt(el,to*(1-Math.pow(1-pr,3)));
+        if(pr<1)requestAnimationFrame(step);
+      }
+      requestAnimationFrame(step);
+    });
+  },{threshold:.4});
+  els.forEach(function(el){io.observe(el)});
+})();
+
+/* v3 signature 4: magnetic CTAs — pull ≤4px within 60px, spring back on leave */
+(function(){
+  if(RM||TOUCH)return;
+  document.querySelectorAll(".magnetic").forEach(function(btn){
+    var raf=null,tx=0,ty=0,cx=0,cy=0,over=false;
+    function loop(){
+      cx+=(tx-cx)*0.18;cy+=(ty-cy)*0.18;
+      btn.style.transform="translate("+cx.toFixed(2)+"px,"+cy.toFixed(2)+"px)";
+      if(Math.abs(tx-cx)>0.1||Math.abs(ty-cy)>0.1)raf=requestAnimationFrame(loop);
+      else{raf=null;if(!over){btn.style.transform="";cx=cy=0}}
+    }
+    function kick(){if(!raf)raf=requestAnimationFrame(loop)}
+    btn.addEventListener("pointermove",function(e){
+      var r=btn.getBoundingClientRect();
+      var mx=e.clientX-(r.left+r.width/2),my=e.clientY-(r.top+r.height/2);
+      var inZone=Math.abs(mx)<r.width/2+60&&Math.abs(my)<r.height/2+60;
+      if(inZone){over=true;tx=Math.max(-4,Math.min(4,mx*0.08));ty=Math.max(-4,Math.min(4,my*0.16));kick()}
+      else{over=false;tx=ty=0;kick()}
+    });
+    btn.addEventListener("pointerleave",function(){over=false;tx=ty=0;kick()});
+  });
+})();
+
+/* v3 micro: cart icon microbounce on add (wraps addToCart, keeps v2.1 behavior) */
+(function(){
+  var btn=document.getElementById("cartBtn");
+  if(!btn)return;
+  var origAdd=addToCart;
+  addToCart=function(id,qty){
+    origAdd(id,qty);
+    if(!RM){btn.classList.remove("bump");void btn.offsetWidth;btn.classList.add("bump")}
+  };
+})();
+
+/* v3 micro: sale badges pulse once per session on first card visibility */
+(function(){
+  if(RM||!("IntersectionObserver" in window))return;
+  var done=false;
+  var io=new IntersectionObserver(function(es){
+    es.forEach(function(en){
+      if(!en.isIntersecting)return;
+      io.unobserve(en.target);
+      if(done)return;
+      done=true;
+      document.querySelectorAll(".pcard .badge").forEach(function(b){b.classList.add("bpulse")});
+    });
+  },{threshold:.2});
+  ["grid","rail"].forEach(function(id){var el=document.getElementById(id);if(el)io.observe(el)});
+  document.addEventListener("animationend",function(e){
+    if(e.target&&e.target.classList&&e.target.classList.contains("badge"))e.target.classList.remove("bpulse");
+  },true);
+})();
+
+/* v3 micro: blur-up — images fade in over the shimmer; never hides cached/erroring images */
+function v3watchImg(im){
+  if(im.__w)return;im.__w=1;
+  im.classList.add("img-wait");
+  var done=function(){im.classList.remove("img-wait")};
+  if(im.complete&&im.naturalWidth)done();
+  else{
+    im.addEventListener("load",done,{once:true});
+    im.addEventListener("error",function(){im.classList.remove("img-wait");im.style.opacity="1"},{once:true});
+  }
+}
+document.querySelectorAll("img").forEach(v3watchImg);
+document.addEventListener("load",function(e){
+  var t=e.target;
+  if(t&&t.tagName==="IMG")v3watchImg(t);
+},true);
+new MutationObserver(function(ms){
+  ms.forEach(function(m){
+    m.addedNodes.forEach(function(n){
+      if(n.nodeType!==1)return;
+      if(n.tagName==="IMG")v3watchImg(n);
+      else if(n.querySelectorAll)Array.prototype.forEach.call(n.querySelectorAll("img"),v3watchImg);
+    });
+  });
+}).observe(document.body,{childList:true,subtree:true});
 
 renderDrawer();
 })();
