@@ -1122,7 +1122,7 @@ footer{border-top:1px solid var(--line);background:#0a090e}
       <span class="lang"><svg class="ic" style="width:14px;height:14px" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a15 15 0 0 1 0 18M12 3a15 15 0 0 0 0 18"/></svg>EN — USD</span>
     </div>
   </div>
-</footer>
+<div style="opacity:.35;font-size:10px;letter-spacing:.2em;text-align:center;padding:8px 0 12px" data-build="v5-motion">NEXRIG · v5 MOTION</div></footer>
 
 <div class="scrim" id="scrim"></div>
 <aside class="drawer" id="drawer" aria-label="Shopping cart">
@@ -2146,5 +2146,11 @@ try{
   /* fallback: static WebP hero stays — canvas simply never fades in */
 }
 </script>
-</body>
+
+<script nomodule>
+(function(){setTimeout(function(){
+  var g=document.getElementById('glHero');
+  if(g&&!g.dataset.live){g.style.background='radial-gradient(circle at 30% 30%,rgba(159,240,236,.18),transparent 60%),radial-gradient(circle at 70% 70%,rgba(111,90,220,.22),transparent 55%)';g.style.animation='xdrift 14s ease-in-out infinite alternate'}
+},2500)})();
+</script></body>
 </html>
