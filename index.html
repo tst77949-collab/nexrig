@@ -754,12 +754,42 @@ nav.top a.on::after{background:var(--acc)}
   border-radius:26px;overflow:hidden;
   -webkit-mask-image:radial-gradient(closest-side,#000 52%,transparent 99%);
   mask-image:radial-gradient(closest-side,#000 52%,transparent 99%)}
-.artbox img,.artbox video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
-.artbox video{opacity:0;transition:opacity .8s ease}
-.artbox video.go{opacity:1}
+.artbox img,.artbox canvas{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.artbox canvas{pointer-events:none}
+/* v5 FLY-DOT: add-to-cart dot flying to the cart icon */
+.flydot{position:fixed;z-index:1200;width:14px;height:14px;border-radius:50%;pointer-events:none;
+  background:radial-gradient(circle at 35% 35%,#dffcf7,var(--acc) 60%,#4ea79f);box-shadow:0 0 14px rgba(159,240,236,.7)}
+/* v5 TEAL GLOW: primary CTA energy fix (v4 lesson) */
+.pillv.glow,.gpbtn.glow,.btn.primary.glow{box-shadow:0 0 24px rgba(159,240,236,.35);transition:box-shadow .3s ease,filter .3s ease}
+.pillv.glow:hover,.gpbtn.glow:hover,.btn.primary.glow:hover{box-shadow:0 0 34px rgba(159,240,236,.5)}
+/* v5 HERO PULSE: main hero CTA only */
+@keyframes ctaPulse{0%,100%{box-shadow:0 0 24px rgba(159,240,236,.35)}50%{box-shadow:0 0 36px rgba(159,240,236,.55)}}
+.pillv.pulse{animation:ctaPulse 2.6s ease-in-out infinite}
+/* v5 CARD TILT (hover 3D + shine) */
+.tiltwrap{perspective:900px}
+.pcard{transform-style:preserve-3d;transition:transform .5s cubic-bezier(.2,.8,.2,1);position:relative}
+@media (hover:hover) and (pointer:fine){
+  .pcard.tilting{transition:transform .08s linear}
+  .pcard.tilting::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;
+    background:radial-gradient(320px circle at var(--mx,50%) var(--my,50%),rgba(159,240,236,.14),transparent 65%)}
+}
+/* v5 SCROLL REVEAL: section/card entry */
+.xrv{opacity:0;transform:translateY(26px);transition:opacity .7s cubic-bezier(.2,.8,.2,1),transform .7s cubic-bezier(.2,.8,.2,1)}
+.xrv.xin{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){
+  .xrv{opacity:1;transform:none;transition:none}
+  .pillv.pulse{animation:none}
+  .flydot{display:none}
+  .pcard{transform:none!important;transition:none}
+  .pcard.tilting::after{display:none}
+  #glHero{display:none}
+}
 @media(prefers-reduced-motion:no-preference){
   .artbox{animation:sbob 7s ease-in-out infinite alternate}
   @keyframes sbob{from{transform:translateY(-8px)}to{transform:translateY(8px)}}
+  /* v5 NAV: hide-on-down / show-on-up */
+  #hdr{transition:transform .38s cubic-bezier(.2,.8,.2,1)}
+  #hdr.navhide{transform:translateY(-110%)}
 }
 /* glass info cards */
 .scard{position:absolute;z-index:5;width:clamp(280px,31vw,451px);padding:22px 24px;border-radius:18px;
@@ -850,6 +880,9 @@ html.rm4 .sheadline .line i{transform:none}
 footer{border-top:1px solid var(--line);background:#0a090e}
 
 </style>
+<script type="importmap">
+{"imports":{"three":"https://unpkg.com/three@0.160.0/build/three.module.js"}}
+</script>
 </head>
 <body>
 
@@ -919,8 +952,7 @@ footer{border-top:1px solid var(--line);background:#0a090e}
         <div class="artbox eg">
           <img id="artStill" src="https://d2ol7oe51mr4n9.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/782a4a52-4c1e-4471-bb0c-aa232927f4a6.webp"
                alt="Isometric glass slabs of data points, waves and pixel blocks glowing teal to violet" width="1200" height="1200">
-          <video id="artVid" poster="https://d2ol7oe51mr4n9.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/782a4a52-4c1e-4471-bb0c-aa232927f4a6.webp"
-                 muted loop playsinline preload="metadata" aria-hidden="true" tabindex="-1"></video>
+          <canvas id="glHero" aria-hidden="true" tabindex="-1"></canvas>
         </div>
         <div class="scard cardA" role="figure" aria-label="Benchmarking — NEXRIG Index">
           <div class="crow">
@@ -1402,6 +1434,7 @@ function renderDrawer(){
 function addToCart(id,qty){
   cart[id]=(cart[id]||0)+(qty||1);save();renderDrawer();
   toast("<b>"+findP(id).name+"</b> added"+((qty||1)>1?" ×"+qty:""));
+  try{flyToCart(id)}catch(e){}
 }
 function setQty(id,q){if(q<=0)delete cart[id];else cart[id]=q;save();renderDrawer()}
 $("#ditems").addEventListener("click",function(e){
@@ -1823,20 +1856,147 @@ new MutationObserver(function(ms){
 renderDrawer();
 })();
 
-/* ============ v4 STRATA runtime: artwork video + one-shot entrance + mobile menu ============ */
+/* ============ v5 STRATA runtime: nav hide-on-down + teal-glow CTAs + reveal/tilt + Three.js hero boot ============ */
 var RM4=matchMedia("(prefers-reduced-motion:reduce)").matches;
 document.documentElement.classList.add("js4");
 if(RM4)document.documentElement.classList.add("rm4");
 
-/* artwork: seamless 5s loop video over the still; still-only under reduced motion */
+/* v5: nav hide-on-scroll-down / show-on-scroll-up (glass blur kept from v4) */
 (function(){
-  var vid=document.getElementById("artVid");
-  if(!vid)return;
-  if(RM4){vid.remove();return}
-  vid.src="https://d2ol7oe51mr4n9.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/435a4fe7-e43b-4e7c-af78-0be083e73569.mp4";
-  vid.addEventListener("playing",function(){vid.classList.add("go")},{once:true});
-  var pp=vid.play();
-  if(pp&&pp.catch)pp.catch(function(){});
+  if(RM4)return;
+  var last=scrollY,tick=false;
+  addEventListener("scroll",function(){
+    if(tick)return;tick=true;
+    requestAnimationFrame(function(){
+      tick=false;
+      var y=scrollY;
+      if(Math.abs(y-last)>6&&y>140){
+        document.getElementById("hdr").classList.toggle("navhide",y>last);
+      }else if(y<=140){
+        document.getElementById("hdr").classList.remove("navhide");
+      }
+      last=y;
+    });
+  },{passive:true});
+})();
+
+/* v5: teal-glow CTA classes + hero pulse */
+(function(){
+  document.querySelector(".pillv[data-buy]").classList.add("glow","pulse");
+  var gb=document.querySelector(".gpbtn");
+  if(gb)gb.classList.add("glow");
+  var ck=document.querySelector(".btn.primary");
+  if(ck)ck.classList.add("glow");
+})();
+
+/* v5: scroll reveal (.xrv → .xin, 80ms stagger via transition-delay) + card tilt + magnetic (≤8px) */
+(function(){
+  if(RM4)return;
+  var els=[].slice.call(document.querySelectorAll(".xrv,.rv:not(.in)"));
+  if("IntersectionObserver" in window){
+    var io=new IntersectionObserver(function(es){
+      es.forEach(function(en){
+        if(!en.isIntersecting)return;
+        io.unobserve(en.target);
+        var i=+(en.target.dataset.xi||0);
+        en.target.style.transitionDelay=(i%6*80)+"ms";
+        en.target.classList.add("xin");
+      });
+    },{threshold:.15});
+    els.forEach(function(el,i){el.dataset.xi=i;io.observe(el)});
+  }else{
+    els.forEach(function(el){el.classList.add("xin")});
+  }
+  /* card tilt + cursor shine */
+  if(matchMedia("(hover:hover) and (pointer:fine)").matches){
+    [].slice.call(document.querySelectorAll(".pcard")).forEach(function(card){
+      card.classList.add("tiltwrap");
+      card.addEventListener("pointermove",function(e){
+        var r=card.getBoundingClientRect();
+        var nx=(e.clientX-r.left)/r.width-0.5,ny=(e.clientY-r.top)/r.height-0.5;
+        card.classList.add("tilting");
+        card.style.transform="perspective(900px) rotateY("+(nx*14).toFixed(2)+"deg) rotateX("+(-ny*14).toFixed(2)+"deg)";
+        card.style.setProperty("--mx",(nx*100+50)+"%");
+        card.style.setProperty("--my",(ny*100+50)+"%");
+      });
+      card.addEventListener("pointerleave",function(){
+        card.classList.remove("tilting");
+        card.style.transform="";
+      });
+      /* magnetic: buttons inside cards pull ≤8px toward cursor, spring back */
+      [].slice.call(card.querySelectorAll(".btn,[data-add]")).forEach(function(btn){
+        if(btn.__mag)return;btn.__mag=1;
+        var raf=null,tx=0,ty=0,cx=0,cy=0,over=false;
+        function loop(){
+          cx+=(tx-cx)*0.18;cy+=(ty-cy)*0.18;
+          btn.style.transform="translate("+cx.toFixed(2)+"px,"+cy.toFixed(2)+"px)";
+          if(Math.abs(tx-cx)>0.1||Math.abs(ty-cy)>0.1)raf=requestAnimationFrame(loop);
+          else{raf=null;if(!over){btn.style.transform="";cx=cy=0}}
+        }
+        function kick(){if(!raf)raf=requestAnimationFrame(loop)}
+        btn.addEventListener("pointermove",function(e){
+          var r=btn.getBoundingClientRect();
+          var mx=e.clientX-(r.left+r.width/2),my=e.clientY-(r.top+r.height/2);
+          if(Math.abs(mx)<r.width/2+40&&Math.abs(my)<r.height/2+40){
+            over=true;tx=Math.max(-8,Math.min(8,mx*0.12));ty=Math.max(-8,Math.min(8,my*0.2));kick();
+          }else{over=false;tx=ty=0;kick()}
+        });
+        btn.addEventListener("pointerleave",function(){over=false;tx=ty=0;kick()});
+      });
+    });
+  }
+})();
+
+/* ============ v5 THREE.JS HERO: particle field + icosahedron (CDN importmap) ============
+   Booted by the type="module" script at the end of <body>; if importmap or
+   modules are unsupported, #glHero simply never fades in and the static
+   WebP backdrop remains (graceful fallback). */
+
+/* v5 FLIP fly-to-cart dot (launched from addToCart) */
+function flyToCart(id){
+  var target=document.getElementById("cartBtn");
+  var src=document.querySelector('.pcard [data-add="'+id+'"]')||document.querySelector("[data-buy]");
+  if(!target||!src)return;
+  var r1=src.getBoundingClientRect(),r2=target.getBoundingClientRect();
+  var d=document.createElement("span");
+  d.className="flydot";d.setAttribute("aria-hidden","true");
+  document.body.appendChild(d);
+  var x=r1.left+r1.width/2-7,y=r1.top+r1.height/2-7;
+  var tx=r2.left+r2.width/2-7,ty=r2.top+r2.height/2-7;
+  d.style.transform="translate("+x+"px,"+y+"px) scale(1)";
+  try{
+    d.animate([
+      {transform:"translate("+x+"px,"+y+"px) scale(1)",opacity:1},
+      {transform:"translate("+((x+tx)/2)+"px,"+(Math.min(y,ty)-90)+"px) scale(.9)",opacity:1,offset:.5},
+      {transform:"translate("+tx+"px,"+ty+"px) scale(.25)",opacity:.4}
+    ],{duration:500,easing:"cubic-bezier(.2,.8,.2,1)"}).addEventListener("finish",function(){d.remove()});
+  }catch(e){
+    d.style.transition="transform .5s cubic-bezier(.2,.8,.2,1),opacity .5s";
+    requestAnimationFrame(function(){
+      d.style.transform="translate("+tx+"px,"+ty+"px) scale(.25)";d.style.opacity=".4";
+      setTimeout(function(){d.remove()},520);
+    });
+  }
+}
+
+/* v5: hero content parallax/fade out slightly on scroll (transform-only, rAF-throttled) */
+(function(){
+  if(RM4)return;
+  var hero=document.querySelector(".shero"),inner=document.querySelector(".sleft");
+  if(!hero||!inner)return;
+  var tick=false;
+  addEventListener("scroll",function(){
+    if(tick)return;tick=true;
+    requestAnimationFrame(function(){
+      tick=false;
+      var y=scrollY,h=hero.offsetHeight||1;
+      if(y<h*1.2){
+        var t=Math.min(1,y/h);
+        inner.style.opacity=String(1-t*0.45);
+        inner.style.transform="translateY("+(t*46).toFixed(1)+"px)";
+      }
+    });
+  },{passive:true});
 })();
 
 /* mobile glass menu */
@@ -1907,6 +2067,84 @@ if(RM4)document.documentElement.classList.add("rm4");
       {duration:520,delay:t4+i*110,easing:E,fill:"forwards"});
   });
 })();
+</script>
+<script type="module">
+/* ============ NEXRIG v5 THREE.JS HERO ============
+   ~400-particle additive field (teal→violet vertex colors) + one large
+   wireframe icosahedron, mouse-reactive parallax (lerp, max ±6°).
+   GPU-cheap: DPR capped 1.75, paused when tab hidden, no-op under
+   prefers-reduced-motion (CSS already hides #glHero + shows static WebP). */
+try{
+  const THREE=await import("three");
+  const cv=document.getElementById("glHero");
+  if(cv&&!matchMedia("(prefers-reduced-motion:reduce)").matches){
+    const rm4=document.documentElement.classList.contains("rm4");
+    if(!rm4){
+      const renderer=new THREE.WebGLRenderer({canvas:cv,alpha:true,antialias:true,powerPreference:"low-power"});
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio||1,1.75));
+      const scene=new THREE.Scene();
+      const cam=new THREE.PerspectiveCamera(50,1,0.1,100);
+      cam.position.set(0,0,7.2);
+      /* --- particle field --- */
+      const N=400,pos=new Float32Array(N*3),col=new Float32Array(N*3);
+      const cA=new THREE.Color("#9ff0ec"),cB=new THREE.Color("#8b5cf6"),tmp=new THREE.Color();
+      for(let i=0;i<N;i++){
+        pos[i*3]=(Math.random()-0.5)*11;
+        pos[i*3+1]=(Math.random()-0.5)*8;
+        pos[i*3+2]=(Math.random()-0.5)*7;
+        tmp.copy(cA).lerp(cB,Math.random());
+        col[i*3]=tmp.r;col[i*3+1]=tmp.g;col[i*3+2]=tmp.b;
+      }
+      const pg=new THREE.BufferGeometry();
+      pg.setAttribute("position",new THREE.BufferAttribute(pos,3));
+      pg.setAttribute("color",new THREE.BufferAttribute(col,3));
+      const pm=new THREE.PointsMaterial({size:0.055,vertexColors:true,transparent:true,opacity:0.85,
+        blending:THREE.AdditiveBlending,depthWrite:false,sizeAttenuation:true});
+      const points=new THREE.Points(pg,pm);
+      scene.add(points);
+      /* --- icosahedron wireframe --- */
+      const ico=new THREE.LineSegments(
+        new THREE.WireframeGeometry(new THREE.IcosahedronGeometry(2.1,1)),
+        new THREE.LineBasicMaterial({color:0x9ff0ec,transparent:true,opacity:0.35})
+      );
+      scene.add(ico);
+      /* --- mouse parallax: lerp toward pointer, max ±6° --- */
+      let tx=0,ty=0;
+      addEventListener("pointermove",function(e){
+        tx=(e.clientX/innerWidth-0.5)*12;
+        ty=(e.clientY/innerHeight-0.5)*-12;
+      },{passive:true});
+      /* --- resize + visibility + loop --- */
+      function resize(){
+        const r=cv.getBoundingClientRect();
+        const w=Math.max(1,r.width),h=Math.max(1,r.height);
+        renderer.setSize(w,h,false);
+        cam.aspect=w/h;cam.updateProjectionMatrix();
+      }
+      resize();addEventListener("resize",resize);
+      let hidden=false;
+      document.addEventListener("visibilitychange",function(){hidden=document.hidden});
+      let rx=0,ry=0,t0=performance.now();
+      renderer.setAnimationLoop(function(now){
+        if(hidden)return;
+        const t=(now-t0)/1000;
+        points.rotation.y=t*0.05;
+        points.rotation.x=Math.sin(t*0.11)*0.06;
+        ico.rotation.x=t*0.16;ico.rotation.y=t*0.21;
+        ico.position.y=Math.sin(t*0.6)*0.18;
+        rx+=(ty-rx)*0.05;ry+=(tx-ry)*0.05;
+        scene.rotation.x=Math.max(-6,Math.min(6,rx))*Math.PI/180;
+        scene.rotation.y=Math.max(-6,Math.min(6,ry))*Math.PI/180;
+        renderer.render(scene,cam);
+      });
+      /* fade canvas in over the WebP backdrop */
+      cv.style.opacity="0";cv.style.transition="opacity .9s ease";
+      requestAnimationFrame(function(){requestAnimationFrame(function(){cv.style.opacity="1"})});
+    }
+  }
+}catch(err){
+  /* fallback: static WebP hero stays — canvas simply never fades in */
+}
 </script>
 </body>
 </html>
