@@ -19,6 +19,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
+<style>
 :root{
   --bg:#0b0d10; --panel:#12151a; --panel2:#171b21;
   --ink:#f2f3f5; --dim:#959ca7;
@@ -661,90 +662,294 @@ img{transition:opacity .45s}
   #cinemaLine{display:none}
 }
 </style>
+
+/* ================== NEXRIG v4 "STRATA" THEME ================== */
+:root{
+  --bg:#0d0c11; --panel:#131217; --panel2:#191821;
+  --ink:#fff; --dim:#b9b8bb; --muted:#d3d3d7;
+  --line:rgba(255,255,255,.09); --hair:rgba(255,255,255,.16);
+  --acc:#9ff0ec; --acc2:#bdf7ee;
+  --vio1:#4d19b1; --vio2:#6f5adc;
+  --acc-dim:rgba(159,240,236,.14); --vio-dim:rgba(111,90,220,.24);
+  --glass:rgba(255,255,255,.02);
+  --u:max(.468px,100vh/1455);
+  --f:clamp(.55px,.449px + .0284vw,.76px);
+  --fd:"DM Sans",Inter,sans-serif;
+}
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&family=Inter:wght@300;400;500;600&display=swap');
+body{background:var(--bg);color:var(--ink);font-weight:400}
+h1,h2,h3,.g,.logo b,.cartn,.sheadline,.sstat b{font-family:var(--fd);letter-spacing:-.02em}
+::selection{background:rgba(159,240,236,.28)}
+:focus-visible{outline:2px solid var(--acc);outline-offset:2px;border-radius:6px}
+
+/* ---- header retheme ---- */
+header{background:rgba(13,12,17,0)}
+header.solid{background:rgba(13,12,17,.8)}
+.logo .bolt{
+  width:calc(46*var(--u) + 6px);height:calc(46*var(--u) + 6px);border-radius:11px;
+  background:linear-gradient(135deg,var(--vio1),var(--vio2));color:#fff;
+  box-shadow:0 0 22px rgba(111,90,220,.5), inset 0 1px 0 rgba(255,255,255,.25);font-size:15px;
+}
+.logo b{font-weight:600;letter-spacing:.01em}
+.logo sup{color:var(--acc);font-size:.5em;font-weight:600;margin-left:2px;line-height:0}
+nav.top{color:var(--dim);font-weight:400;gap:clamp(14px,calc(48*var(--u) + 10px),40px)}
+nav.top a.on::after{background:var(--acc)}
+.gpbtn{
+  height:calc(63*var(--u) + 8px);min-width:calc(202*var(--f) + 46px);padding:0 22px;border-radius:999px;
+  border:1px solid var(--hair);background:var(--glass);color:#fff;font-weight:500;font-size:14px;
+  backdrop-filter:blur(8px) brightness(1.15) saturate(.8);-webkit-backdrop-filter:blur(8px) brightness(1.15) saturate(.8);
+  transition:border-color .25s,background .25s;white-space:nowrap;
+}
+.gpbtn:hover{border-color:var(--acc);background:var(--acc-dim)}
+.ilogin{color:var(--dim);font-size:14px;padding:6px 2px;transition:color .25s}
+.ilogin:hover{color:#fff}
+.iconbtn:hover{border-color:var(--hair);background:var(--glass)}
+.cartn{background:var(--vio2)}
+/* mobile menu */
+.mbtn{display:none;min-width:46px;min-height:46px;border-radius:11px;border:1px solid var(--hair);place-items:center}
+.mnav{
+  position:absolute;top:calc(100% + 8px);right:clamp(12px,4vw,28px);min-width:230px;z-index:80;
+  background:rgba(19,18,23,.92);border:1px solid var(--hair);border-radius:16px;padding:8px;
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);box-shadow:0 24px 60px rgba(0,0,0,.55);
+  display:none;flex-direction:column;
+}
+.mnav.open{display:flex}
+.mnav a{padding:12px 14px;border-radius:10px;color:var(--muted);font-size:15px}
+.mnav a:hover,.mnav a.on{background:var(--glass);color:#fff}
+@media(max-width:960px){
+  nav.top,.ilogin,.gpbtn{display:none}
+  .mbtn{display:grid}
+  .hin{position:relative}
+}
+
+/* ---- v4 hero (Strata) ---- */
+.shero{position:relative;max-width:1512px;margin:0 auto;
+  padding:calc(120*var(--u) + var(--st)) clamp(16px,4vw,40px) 0}
+.sgrid{display:grid;grid-template-columns:minmax(0,44%) minmax(0,1fr);gap:3vw;align-items:start}
+.sheadline{font-weight:300;font-size:clamp(40px,calc(104*var(--u) + 24px),104px);line-height:1.17}
+.sheadline .line{display:block;overflow:hidden}
+.sheadline .line i{display:block;font-style:normal;transform:translateY(112%)}
+.sheadline .line:nth-child(2) i{color:#e3e3e8}
+.sheadline .line:nth-child(3) i{color:#c9c9cf}
+.ssub{margin-top:calc(34*var(--u));max-width:48ch;color:var(--muted);font-weight:300;
+  font-size:clamp(15px,calc(29.5*var(--u)),21px);line-height:1.6}
+.scta{display:flex;gap:14px;margin-top:calc(40*var(--u));flex-wrap:wrap}
+.pillv{height:calc(85*var(--u) + 12px);padding:0 34px;border-radius:999px;border:none;color:#fff;
+  font-weight:500;font-size:clamp(14px,calc(19*var(--u)),17px);display:inline-flex;align-items:center;cursor:pointer;
+  background:linear-gradient(135deg,#6428d6,var(--vio2));
+  box-shadow:0 12px 34px rgba(77,25,177,.45), inset 0 1px 0 rgba(255,255,255,.25);
+  transition:filter .25s,transform .25s}
+.pillv:hover{filter:brightness(1.12)}
+.pilld{height:calc(85*var(--u) + 12px);padding:0 32px;border-radius:999px;color:#fff;
+  font-weight:450;font-size:clamp(14px,calc(19*var(--u)),17px);display:inline-flex;align-items:center;
+  background:rgba(255,255,255,.04);border:1px solid var(--hair);
+  backdrop-filter:blur(8px) brightness(1.15) saturate(.8);-webkit-backdrop-filter:blur(8px) brightness(1.15) saturate(.8);
+  transition:border-color .25s}
+.pilld:hover{border-color:var(--acc)}
+.sstats{display:flex;align-items:center;gap:clamp(16px,calc(30*var(--u)),34px);margin-top:calc(64*var(--u))}
+.sstat b{display:block;font-weight:400;font-size:clamp(24px,calc(50*var(--u)),50px);line-height:1.1}
+.sstat span{display:block;color:var(--dim);font-size:clamp(11px,calc(25*var(--u)),15px);margin-top:4px;font-weight:400}
+.ssep{width:1px;align-self:stretch;background:var(--hair)}
+/* artwork box */
+.sright{position:relative;padding:calc(30*var(--u)) 0 calc(30*var(--u))}
+.artbox{position:relative;width:min(100%,calc(1120*var(--u) + 120px));max-width:820px;aspect-ratio:1;margin-left:auto;
+  border-radius:26px;overflow:hidden;
+  -webkit-mask-image:radial-gradient(closest-side,#000 52%,transparent 99%);
+  mask-image:radial-gradient(closest-side,#000 52%,transparent 99%)}
+.artbox img,.artbox video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.artbox video{opacity:0;transition:opacity .8s ease}
+.artbox video.go{opacity:1}
+@media(prefers-reduced-motion:no-preference){
+  .artbox{animation:sbob 7s ease-in-out infinite alternate}
+  @keyframes sbob{from{transform:translateY(-8px)}to{transform:translateY(8px)}}
+}
+/* glass info cards */
+.scard{position:absolute;z-index:5;width:clamp(280px,31vw,451px);padding:22px 24px;border-radius:18px;
+  background:var(--glass);border:1px solid var(--hair);
+  backdrop-filter:blur(8px) brightness(1.15) saturate(.8);-webkit-backdrop-filter:blur(8px) brightness(1.15) saturate(.8);
+  box-shadow:0 24px 60px rgba(0,0,0,.5), inset 0 0 48px rgba(255,255,255,.035);
+}
+.cardA{top:2%;left:-3%}
+.cardB{bottom:1%;right:-2%}
+.scard .crow{display:flex;gap:16px;align-items:center}
+.icon-tile{flex:0 0 auto;width:calc(63*var(--u) + 18px);height:calc(63*var(--u) + 18px);border-radius:14px;
+  display:grid;place-items:center;border:1px solid var(--hair);
+  background:linear-gradient(135deg,rgba(111,90,220,.4),rgba(159,240,236,.12));color:var(--acc)}
+.icon-tile .ic{width:26px;height:26px}
+.kt{display:block;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--acc);font-weight:500}
+.kt.vb{color:#cfc4ff}
+.scard h3{margin-top:6px;font-weight:450;font-size:clamp(15px,calc(29*var(--u)),19px);line-height:1.35}
+/* logo row */
+.logorow{display:flex;justify-content:center;align-items:baseline;flex-wrap:wrap;
+  gap:clamp(28px,calc(48*var(--u) + 22px),72px);margin-top:calc(70*var(--u));
+  padding-bottom:calc(46*var(--u));color:#8f8e94;font-size:clamp(15px,calc(22*var(--u) + 3px),24px)}
+.logorow .l1,.logorow .l2{font-style:italic;font-weight:700}
+.logorow .l3{font-weight:400;letter-spacing:.28em}
+.logorow .l4{font-weight:700;letter-spacing:.1em}
+
+/* ---- entrance pre-states (only when JS running, motion allowed) ---- */
+html.js4:not(.rm4) .eg{opacity:0}
+html.js4:not(.rm4) .eg-hl i{transform:translateY(112%)}
+html.rm4 .sheadline .line i{transform:none}
+/* mobile reflow: one centred column */
+@media(max-width:960px){
+  .sgrid{grid-template-columns:1fr;gap:40px;text-align:center}
+  .shero{padding-top:calc(70*var(--u) + var(--st))}
+  .ssub{margin-inline:auto}
+  .scta{justify-content:center}
+  .sstats{justify-content:center}
+  .sright{padding:0}
+  .artbox{margin-inline:auto}
+  .cardA{top:-4%;left:2%}
+  .cardB{bottom:-4%;right:2%}
+}
+
+/* ---- component overrides for grafted v3 sections ---- */
+.ann{background:#0a090e;border-bottom:1px solid var(--line)}
+.ann a{color:var(--acc)}
+.btn{border-radius:999px}
+.btn.buy{background:linear-gradient(135deg,#6428d6,var(--vio2));box-shadow:0 10px 28px rgba(77,25,177,.4)}
+.btn.buy:hover{filter:brightness(1.12)}
+.btn.ghost{border:1px solid var(--hair)}
+.btn.ghost:hover{border-color:var(--acc);color:var(--acc)}
+.kicker{color:var(--acc)}
+.kicker .pulse{background:var(--acc)}
+.chip{border:1px solid var(--hair);background:var(--glass)}
+.chip.on{background:linear-gradient(135deg,var(--vio1),var(--vio2));border-color:transparent;color:#fff}
+.badge{background:linear-gradient(135deg,var(--vio1),var(--vio2))}
+.badge.soft{background:var(--acc-dim);color:var(--acc)}
+.rate .stars{color:var(--acc)}
+.add{border:1px solid var(--hair);background:var(--glass)}
+.add:hover{border-color:var(--acc);color:var(--acc);background:var(--acc-dim)}
+.schip{background:rgba(255,255,255,.045);border:1px solid var(--line);color:var(--muted)}
+.low{color:var(--acc)}
+.stockbar i{background:linear-gradient(90deg,var(--acc),var(--acc2))}
+.rbtn{border:1px solid var(--hair);background:var(--glass)}
+.rbtn:hover:not(:disabled){border-color:var(--acc);color:var(--acc)}
+.searchpanel{background:rgba(19,18,23,.95);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
+.searchpanel .srow.sel{border-left-color:var(--acc)}
+.tcard{border:1px solid var(--line)}
+.metric{color:var(--acc)}
+.dealbox{border:1px solid var(--hair);background:var(--glass);
+  backdrop-filter:blur(8px) brightness(1.15) saturate(.8)}
+.codebox{color:var(--acc);border:1px dashed rgba(159,240,236,.5)}
+.cd .u{border:1px solid var(--line)}
+.rev{border:1px solid var(--line)}
+.checkout{background:linear-gradient(135deg,#6428d6,var(--vio2))}
+.drawer{background:rgba(19,18,23,.96);border-left:1px solid var(--line);
+  backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)}
+.scrim,.mscrim{background:rgba(8,7,11,.66)}
+.mbox,.ckbox{background:rgba(19,18,23,.97);border:1px solid var(--hair);
+  backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)}
+.ffield input,.ffield select{border:1px solid var(--line);background:rgba(255,255,255,.03)}
+.ffield input:focus,.ffield select:focus{border-color:var(--acc)}
+.payopt{border:1px solid var(--line)}
+.payopt.on{border-color:var(--acc);background:var(--acc-dim)}
+.cksubmit{background:linear-gradient(135deg,#6428d6,var(--vio2))}
+#toTop{background:var(--panel);border:1px solid var(--hair)}
+.toast{background:rgba(19,18,23,.96);border:1px solid var(--hair)}
+#intro{display:none!important}
+footer{border-top:1px solid var(--line);background:#0a090e}
+
+</style>
 </head>
 <body>
-<!-- v3 SIGNATURE 1: cinematic opening -->
-<!-- v3 VERIFY: reload within same session does NOT replay (sessionStorage nexrig_seen); Skip button works; prefers-reduced-motion skips entirely -->
-<div id="intro" role="presentation" aria-hidden="true">
-  <div class="iwipe"></div>
-  <div class="iw">
-    <div class="ibolt">
-      <svg viewBox="0 0 48 48" width="52" height="52" aria-hidden="true">
-        <path class="bolt-stroke" d="M27 4 10 27h10l-3 17 18-25H24l3-15Z"/>
-      </svg>
-    </div>
-    <div class="iword">NEXRIG</div>
-    <div class="itag">Engineered to win.</div>
-  </div>
-  <button id="introSkip" type="button">Skip</button>
-</div>
 
 <div class="ann">RTX-Series restock live — free shipping over $99 <a href="#catalog">See details</a></div>
 
 <header id="hdr">
   <div class="hin">
-    <a class="logo" href="#top" aria-label="NEXRIG home">
-      <span class="bolt">N</span><b>NEXRIG</b>
+    <a class="logo eg" href="#top" aria-label="NEXRIG home">
+      <span class="bolt" aria-hidden="true">S</span><b>NEXRIG<sup aria-hidden="true">•</sup></b>
     </a>
     <nav class="top" aria-label="Primary">
-      <a href="#catalog" class="on">Products</a>
-      <a href="#tech">Technology</a>
-      <a href="#deal">Deals</a>
-      <a href="#reviews">Reviews</a>
+      <a href="#catalog" class="on eg">Products</a>
+      <a href="#tech" class="eg">Builds</a>
+      <a href="#deal" class="eg">GPU Lab</a>
+      <a href="#reviews" class="eg">Esports</a>
+      <a href="#" class="eg">Support</a>
+      <a href="#" class="eg">Changelog</a>
     </nav>
     <div class="hdr-r">
-      <div class="searchwrap">
+      <div class="searchwrap eg">
         <button class="iconbtn" id="searchBtn" aria-label="Search products" aria-expanded="false">
           <svg class="ic" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
         </button>
         <div class="searchpanel" id="searchPanel"></div>
       </div>
-      <button class="iconbtn" id="cartBtn" aria-label="Open cart">
+      <button class="iconbtn eg" id="cartBtn" aria-label="Open cart">
         <svg class="ic" viewBox="0 0 24 24"><path d="M6 6h15l-1.7 8.5a2 2 0 0 1-2 1.5H9.2a2 2 0 0 1-2-1.6L5.2 4H2"/><circle cx="10" cy="20" r="1.4"/><circle cx="18" cy="20" r="1.4"/></svg>
         <span class="cartn" id="cartCount">0</span>
       </button>
+      <a href="#" class="ilogin eg">Log in</a>
+      <button class="gpbtn eg" type="button">Build Your Rig</button>
+      <button class="mbtn" id="mbtn" aria-label="Open menu" aria-expanded="false">
+        <svg class="ic" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
     </div>
+    <nav class="mnav" id="mnav" aria-label="Mobile">
+      <a href="#catalog" class="on">Products</a><a href="#tech">Builds</a><a href="#deal">GPU Lab</a>
+      <a href="#reviews">Esports</a><a href="#">Support</a><a href="#">Changelog</a>
+    </nav>
   </div>
 </header>
 
 <main id="top">
-  <!-- HERO -->
-  <div id="heroCine">
-  <!-- v3 SIGNATURE 3: scroll cinema — v3 VERIFY: hero fades+zooms (transform/opacity via rAF) while the sticky outline headline slides over it; only one such moment on the page -->
-  <div id="cinemaLine" aria-hidden="true">Engineered to win.</div>
-  <section class="hero" id="hero" style="padding-top:0">
-    <div class="bgimg" id="heroBg"></div>
-    <div class="heroimg" id="heroImg">
-      <!-- v3 SIGNATURE 2: 3D tilt — v3 VERIFY: card tilts with pointer (max ±6deg, lerp .08), rests on leave; disabled on touch + reduced-motion -->
-      <div class="tiltcard" id="tiltCard">
-        <div class="sheen"></div>
-        <img src="https://images.unsplash.com/photo-1591488320449-011701bb6704?w=1200&q=80" alt="NEXRIG Nexus RTX prebuilt gaming PC" fetchpriority="high" width="1200" height="800" id="heroPic" class="img-hero">
+  <!-- ============ STRATA HERO ============ -->
+  <section class="shero" aria-label="NEXRIG intro">
+    <div class="sgrid">
+      <div class="sleft">
+        <h1 class="sheadline">
+          <span class="line eg-hl"><i>Performance rigs</i></span>
+          <span class="line eg-hl"><i>built from parts</i></span>
+          <span class="line eg-hl"><i>you trust.</i></span>
+        </h1>
+        <p class="ssub eg">Every unit is burn-in tested, BIOS-tuned and hand-routed before it ships — hardware we run ourselves, ranked where you can check the math.</p>
+        <div class="scta">
+          <button class="pillv eg" data-buy type="button">Build Your Rig</button>
+          <a class="pilld eg" href="#catalog">Browse Parts</a>
+        </div>
+        <div class="sstats">
+          <div class="sstat eg"><b class="num" data-to="20000" data-fmt="k" data-suf="+">0</b><span>builds</span></div>
+          <div class="ssep" aria-hidden="true"></div>
+          <div class="sstat eg"><b class="num" data-to="4.8" data-dec="1" data-suf="★">0</b><span>rating</span></div>
+          <div class="ssep" aria-hidden="true"></div>
+          <div class="sstat eg"><b class="num" data-to="48" data-suf="h">0</b><span>delivery</span></div>
+        </div>
+      </div>
+      <div class="sright">
+        <div class="artbox eg">
+          <img id="artStill" src="https://d2ol7oe51mr4n9.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/782a4a52-4c1e-4471-bb0c-aa232927f4a6.webp"
+               alt="Isometric glass slabs of data points, waves and pixel blocks glowing teal to violet" width="1200" height="1200">
+          <video id="artVid" poster="https://d2ol7oe51mr4n9.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/782a4a52-4c1e-4471-bb0c-aa232927f4a6.webp"
+                 muted loop playsinline preload="metadata" aria-hidden="true" tabindex="-1"></video>
+        </div>
+        <div class="scard cardA" role="figure" aria-label="Benchmarking — NEXRIG Index">
+          <div class="crow">
+            <span class="icon-tile" aria-hidden="true">
+              <svg class="ic" viewBox="0 0 24 24"><circle cx="5" cy="12" r="2.2"/><circle cx="12" cy="5" r="2.2"/><circle cx="12" cy="19" r="2.2"/><circle cx="19" cy="12" r="2.2"/><path d="M7 11l3-4.5M7 13l3 4.5M14 5.8l3.4 4.4M14 18.2l3.4-4.4"/></svg>
+            </span>
+            <div><span class="kt">Benchmarking</span>
+            <h3>NEXRIG Index: Peer-Scored,<br>Battle-Tested Components.</h3></div>
+          </div>
+        </div>
+        <div class="scard cardB" role="figure" aria-label="Red-team — Stress Lab">
+          <div class="crow">
+            <span class="icon-tile" aria-hidden="true">
+              <svg class="ic" viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 4.5-3.2 7.6-8 9-4.8-1.4-8-4.5-8-9V6l8-3Z"/><path d="M9 12l2 2 4-4"/></svg>
+            </span>
+            <div><span class="kt vb">Red-team</span>
+            <h3>Stress Lab: BASTION — Adversarial Stress<br>for Battle-Ready Rigs.</h3></div>
+          </div>
+        </div>
       </div>
     </div>
-    <div class="inner wrap hero-rv">
-      <span class="kicker"><span class="pulse"></span>Nexus RTX Rig — Prebuilt</span>
-      <h1>Built<br>beyond <span class="outline">limits.</span></h1>
-      <p class="sub">One machine, zero compromises. The Nexus RTX ships burn-in tested, cable-managed and BIOS-tuned — ready for 240 fps the moment you plug it in.</p>
-      <div class="cta-row">
-        <button class="btn buy magnetic" data-buy>Buy now — $1,899</button>
-        <a href="#tech" class="btn ghost">Explore the tech</a>
-      </div>
-      <div class="specstrip">
-        <span class="spec">RTX 4080 SUPER</span>
-        <span class="spec">i9-14900K</span>
-        <span class="spec">64 GB DDR5</span>
-        <span class="spec">2 TB NVMe Gen4</span>
-      </div>
-      <!-- v3 SIGNATURE 5: counters — v3 VERIFY: count up from 0 over 900ms when scrolled into view; reduced motion shows final values instantly -->
-      <div class="hstats" id="hstats">
-        <div class="hstat"><b class="num" data-to="31600" data-fmt="k">0</b><span>Rigs shipped</span></div>
-        <div class="hstat"><b class="num" data-to="48" data-suf="h">0</b><span>Burn-in per unit</span></div>
-        <div class="hstat"><b class="num" data-to="8000" data-fmt="k" data-suf=" Hz">0</b><span>Polling rate</span></div>
-        <div class="hstat"><b class="num" data-to="4.8" data-dec="1">0</b><span>Avg. review score</span></div>
-      </div>
+    <div class="logorow" aria-label="Brand partners">
+      <span class="l1">ASUS</span><span class="l2">NVIDIA</span><span class="l3">CORSAIR</span><span class="l4">HALL&nbsp;EFFECT</span>
     </div>
   </section>
-  </div>
+
+
 
   <!-- FEATURED RAIL -->
   <section class="wrap" id="featured">
@@ -1309,9 +1514,9 @@ function toast(html){
 var hdr=$("#hdr"),heroBg=$("#heroBg"),toTop=$("#toTop");
 function onScroll(){
   var y=scrollY;
-  hdr.classList.toggle("solid",y>40);
-  toTop.classList.toggle("show",y>600);
-  if(!matchMedia("(prefers-reduced-motion:reduce)").matches&&y<innerHeight){
+  if(hdr)hdr.classList.toggle("solid",y>40);
+  if(toTop)toTop.classList.toggle("show",y>600);
+  if(heroBg&&!matchMedia("(prefers-reduced-motion:reduce)").matches&&y<innerHeight){
     heroBg.style.transform="translateY("+(y*0.18)+"px)";
   }
 }
@@ -1618,6 +1823,91 @@ new MutationObserver(function(ms){
 }).observe(document.body,{childList:true,subtree:true});
 
 renderDrawer();
+})();
+
+/* ============ v4 STRATA runtime: artwork video + one-shot entrance + mobile menu ============ */
+var RM4=matchMedia("(prefers-reduced-motion:reduce)").matches;
+document.documentElement.classList.add("js4");
+if(RM4)document.documentElement.classList.add("rm4");
+
+/* artwork: seamless 5s loop video over the still; still-only under reduced motion */
+(function(){
+  var vid=document.getElementById("artVid");
+  if(!vid)return;
+  if(RM4){vid.remove();return}
+  vid.src="https://d2ol7oe51mr4n9.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/435a4fe7-e43b-4e7c-af78-0be083e73569.mp4";
+  vid.addEventListener("playing",function(){vid.classList.add("go")},{once:true});
+  var pp=vid.play();
+  if(pp&&pp.catch)pp.catch(function(){});
+})();
+
+/* mobile glass menu */
+(function(){
+  var b=document.getElementById("mbtn"),m=document.getElementById("mnav");
+  if(!b||!m)return;
+  function set(o){m.classList.toggle("open",o);b.setAttribute("aria-expanded",o?"true":"false")}
+  b.addEventListener("click",function(){set(!m.classList.contains("open"))});
+  m.addEventListener("click",function(e){if(e.target.closest("a"))set(false)});
+  document.addEventListener("click",function(e){
+    if(m.classList.contains("open")&&!e.target.closest("#mnav")&&!e.target.closest("#mbtn"))set(false);
+  });
+  document.addEventListener("keydown",function(e){
+    if(e.key==="Escape"&&m.classList.contains("open"))set(false);
+  });
+})();
+
+/* ONE Web Animations API entrance timeline — runs once, then static */
+(function(){
+  if(RM4)return;
+  var E="cubic-bezier(.22,.61,.36,1)";
+  var A=function(el,kf,o){try{return el.animate(kf,o)}catch(e){el.style.opacity="1";return null}};
+  /* header items rise+fade left→right */
+  var hdrEls=[].slice.call(document.querySelectorAll("#hdr .eg"));
+  hdrEls.forEach(function(el,i){
+    A(el,[{opacity:0,transform:"translateY(-12px)"},{opacity:1,transform:"none"}],
+      {duration:560,delay:i*70,easing:E,fill:"forwards"});
+  });
+  var base=hdrEls.length*70+160;
+  /* headline lines rise out of clip masks, staggered .12s */
+  var lines=[].slice.call(document.querySelectorAll(".sheadline .line i"));
+  lines.forEach(function(el,i){
+    A(el,[{transform:"translateY(112%)"},{transform:"translateY(0)"}],
+      {duration:760,delay:base+i*120,easing:E,fill:"forwards"});
+  });
+  var t2=base+lines.length*120+120;
+  /* subline settles */
+  var sub=document.querySelector(".ssub");
+  if(sub)A(sub,[{opacity:0,transform:"translateY(16px)"},{opacity:1,transform:"none"}],
+    {duration:600,delay:t2,easing:E,fill:"forwards"});
+  /* buttons, primary ends with a subtle 1.5% scale settle */
+  [].slice.call(document.querySelectorAll(".scta .eg")).forEach(function(el,i){
+    A(el,[
+      {opacity:0,transform:"translateY(14px) scale(1.015)"},
+      {opacity:1,transform:"translateY(0) scale(1.015)",offset:.82},
+      {opacity:1,transform:"translateY(0) scale(1)"}
+    ],{duration:640,delay:t2+140+i*90,easing:E,fill:"forwards"});
+  });
+  /* stats rise one by one */
+  var stats=[].slice.call(document.querySelectorAll(".sstats .sstat"));
+  stats.forEach(function(el,i){
+    A(el,[{opacity:0,transform:"translateY(18px)"},{opacity:1,transform:"none"}],
+      {duration:520,delay:t2+340+i*90,easing:E,fill:"forwards"});
+  });
+  var t3=t2+340+stats.length*90;
+  /* artwork + two glass cards lift in */
+  var ab=document.querySelector(".artbox");
+  if(ab)A(ab,[{opacity:0,transform:"scale(.965)"},{opacity:1,transform:"none"}],
+    {duration:800,delay:t3,easing:E,fill:"forwards"});
+  [].slice.call(document.querySelectorAll(".scard")).forEach(function(el,i){
+    A(el,[{opacity:0,transform:"translateY(28px)"},{opacity:1,transform:"none"}],
+      {duration:640,delay:t3+220+i*160,easing:E,fill:"forwards"});
+  });
+  var t4=t3+380;
+  /* logo row fades in left→right */
+  [].slice.call(document.querySelectorAll(".logorow > *")).forEach(function(el,i){
+    A(el,[{opacity:0,transform:"translateX(-12px)"},{opacity:1,transform:"none"}],
+      {duration:520,delay:t4+i*110,easing:E,fill:"forwards"});
+  });
 })();
 </script>
 </body>
